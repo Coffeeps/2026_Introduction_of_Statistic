@@ -6,6 +6,7 @@
 <title>量化分析：統計學入門</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
 <style>
+
 :root {
   --ink: #1a1814;
   --ink-light: #3d3a35;
@@ -218,7 +219,7 @@ body {
 /* ── Unit Section ── */
 .unit {
   margin-bottom: 72px;
-  scroll-margin-top: 24px;
+  scroll-margin-top: 72px;
 }
 .unit-header {
   display: flex;
@@ -720,24 +721,66 @@ body {
   margin: 16px 0;
 }
 @media(max-width:600px) { .two-col { grid-template-columns: 1fr; } }
+
+.cover-sub { font-family:'Noto Serif TC',serif; font-size:16px; color:var(--ink-muted); font-weight:300; margin-top:4px; }
+
+/* ── R Code Block ── */
+.r-block { background:#1e1e1e; border-radius:6px; padding:20px 24px; margin:20px 0; overflow-x:auto; }
+.r-block-label { font-family:'Source Code Pro',monospace; font-size:10px; letter-spacing:0.2em; color:#6a9955; text-transform:uppercase; margin-bottom:10px; }
+.r-block pre { font-family:'Source Code Pro',monospace; font-size:13px; line-height:1.8; color:#d4d4d4; white-space:pre; margin:0; }
+.r-comment{color:#6a9955;} .r-string{color:#ce9178;} .r-func{color:#dcdcaa;} .r-num{color:#b5cea8;} .r-kw{color:#569cd6;} .r-var{color:#9cdcfe;}
+.step-flow{display:flex;flex-direction:column;gap:0;margin:20px 0;}
+.step-item{display:flex;align-items:flex-start;gap:16px;position:relative;padding-bottom:20px;}
+.step-item:not(:last-child)::after{content:'';position:absolute;left:19px;top:40px;bottom:0;width:2px;background:var(--border);}
+.step-num{width:40px;height:40px;border-radius:50%;background:var(--teal);color:white;font-family:'Source Code Pro',monospace;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-content{flex:1;padding-top:8px;}
+.step-content strong{font-size:15px;color:var(--ink);display:block;margin-bottom:4px;}
+.step-content p{font-size:14px;color:var(--ink-light);line-height:1.7;margin:0;}
+.sampling-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+@media(max-width:600px){.sampling-grid{grid-template-columns:1fr;}}
+.sampling-card{border:1px solid var(--border);border-radius:4px;padding:16px 18px;background:white;}
+.sampling-card-title{font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.sampling-card-tag{font-family:'Source Code Pro',monospace;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:400;}
+.tag-random{background:var(--teal-light);color:var(--teal);} .tag-nonrandom{background:var(--accent-light);color:#7a2510;}
+.sampling-card p{font-size:13.5px;color:var(--ink-light);line-height:1.7;margin:0;}
+.reg-output{background:#1e1e1e;border-radius:6px;padding:16px 20px;margin:16px 0;font-family:'Source Code Pro',monospace;font-size:12.5px;color:#d4d4d4;line-height:1.9;overflow-x:auto;}
+.reg-highlight{color:#dcdcaa;font-weight:600;} .reg-sig{color:#4ec9b0;} .reg-comment{color:#6a9955;}
+/* ── Tab system ── */
+.tab-bar{position:sticky;top:0;z-index:200;background:var(--paper);border-bottom:2px solid var(--border);display:flex;gap:0;padding:0 24px;box-shadow:0 2px 8px rgba(30,25,18,0.08);}
+.tab-btn{font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;padding:14px 32px;border:none;background:transparent;color:var(--ink-muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:color 0.2s,border-color 0.2s;letter-spacing:0.02em;}
+.tab-btn:hover{color:var(--ink);}
+.tab-btn.active{color:var(--teal);border-bottom-color:var(--teal);}
+.tab-pane{display:none;}
+.tab-pane.active{display:block;}
+
 </style>
 </head>
 <body>
-<div class="page-wrap">
 
-<!-- ══ COVER ══ -->
 <header class="cover">
   <div class="cover-tag">量化分析</div>
   <h1>統計學入門</h1>
   <div class="cover-author">
     <div class="cover-author-name">陳奕如</div>
     <div class="cover-author-title">國立清華大學資訊系統與應用研究所　博士候選人</div>
-    <a class="cover-author-email" id="author-email-link">coffee.cheniju&#64;gmail.com</a>
+    <a class="cover-author-email">coffee.cheniju&#64;gmail.com</a>
   </div>
   <div class="cover-divider"></div>
 </header>
 
-<!-- ══ TOOL CALLOUT ══ -->
+<nav class="tab-bar">
+  <button class="tab-btn active" data-tab="tab-lec1" onclick="switchTab('tab-lec1')">
+    第一講（2026/04/11） <span class="tab-badge">Unit 01–07</span>
+  </button>
+  <button class="tab-btn" data-tab="tab-lec2" onclick="switchTab('tab-lec2')">
+    第二講（2024/04/25） <span class="tab-badge">Unit 08–13</span>
+  </button>
+</nav>
+
+<!-- ══════════════ 第一講 ══════════════ -->
+<div class="tab-pane active" id="tab-lec1">
+<div class="page-wrap">
+
 <div class="tool-callout">
   <img src="data:image/png;base64,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" alt="SPSS下載QR Code">
   <div class="tool-callout-body">
@@ -757,30 +800,26 @@ body {
   </div>
   <div class="tool-callout-body">
     <h3 style="color:var(--accent);">🖥️ 課前準備：下載 R ＆ RStudio（套件多、視覺化可自訂空間大）</h3>
-    <p>本課程亦可搭配 <strong>R / RStudio</strong> 進行統計操作與資料視覺化。請前往下方頁面，依序安裝 R 語言與 RStudio IDE。</p>
+    <p>本課程請可搭配 <strong>R / RStudio</strong> 進行統計操作與資料視覺化。請前往下方頁面，依序安裝 R 語言與 RStudio IDE。</p>
     <a href="https://posit.co/download/rstudio-desktop/" target="_blank" style="color:var(--accent);">https://posit.co/download/rstudio-desktop/</a>
     <p style="font-size:12px;color:var(--ink-muted);margin-top:6px;">⬆ 頁面進入後</p>
     <p style="font-size:12px;color:var(--ink-muted);margin-top:6px;">1.先安裝 R； 2.再安裝 RStudio Desktop（免費）； 3.下載後請開啟 RStudio。</p>
   </div>
 </div>
 
-<!-- ══ TOC ══ -->
 <nav class="toc">
-  <div class="toc-title">2026/04/11 今日課程目錄</div>
+  <div class="toc-title">第一講 — 2026/04/11 課程目錄</div>
   <ol>
-    <li><a href="#unit1">統計學導論</a></li>
-    <li><a href="#unit2">母體與樣本</a></li>
-    <li><a href="#unit3">統計變數與測量尺度</a></li>
-    <li><a href="#unit4">誤差、顯著性與信效度</a></li>
-    <li><a href="#unit5">彙總資料：表格與圖表</a></li>
-    <li><a href="#unit6">集中趨勢與離散趨勢</a></li>
-    <li><a href="#unit7">假設檢定與統計分析方法</a></li>
+    <li><a href="javascript:void(0)" onclick="navToUnit('tab-lec1','unit1')">統計學導論</a></li>
+    <li><a href="javascript:void(0)" onclick="navToUnit('tab-lec1','unit2')">母體與樣本</a></li>
+    <li><a href="javascript:void(0)" onclick="navToUnit('tab-lec1','unit3')">統計變數與測量尺度</a></li>
+    <li><a href="javascript:void(0)" onclick="navToUnit('tab-lec1','unit4')">誤差、顯著性與信效度</a></li>
+    <li><a href="javascript:void(0)" onclick="navToUnit('tab-lec1','unit5')">彙總資料：表格與圖表</a></li>
+    <li><a href="javascript:void(0)" onclick="navToUnit('tab-lec1','unit6')">集中趨勢與離散趨勢</a></li>
+    <li><a href="javascript:void(0)" onclick="navToUnit('tab-lec1','unit7')">假設檢定與統計分析方法</a></li>
   </ol>
 </nav>
 
-<!-- ══════════════════════════════════ -->
-<!-- UNIT 1 -->
-<!-- ══════════════════════════════════ -->
 <section class="unit" id="unit1">
   <div class="unit-header">
     <div>
@@ -1906,6 +1945,33 @@ body {
       <button class="quiz-btn" onclick="resetQuiz('quiz5')">重置</button>
     </div>
   </div>
+
+  <div class="section" style="margin-top:32px;">
+    <h2 class="section-title">R 語法示範：統計圖表繪製</h2>
+    <p style="font-size:14px;color:var(--ink-muted);margin-bottom:8px;">&#128193; <strong>對應語法檔：</strong>統計學_R語法與資料集.R → DATASET 1 &amp; 2</p>
+    <div class="r-block">
+      <div class="r-block-label">直方圖 / 長條圖 / 箱形圖 — ggplot2</div>
+      <pre><span class="r-comment"># 前置：執行 DATASET 1 建立 scores 資料框</span>
+
+<span class="r-comment"># 圖一：直方圖（標示均值與中位數）</span>
+<span class="r-func">ggplot</span>(scores, <span class="r-func">aes</span>(x = score)) +
+  <span class="r-func">geom_histogram</span>(binwidth = <span class="r-num">5</span>, fill = <span class="r-string">"#FFC0CB"</span>, color = <span class="r-string">"white"</span>) +
+  <span class="r-func">geom_vline</span>(<span class="r-func">aes</span>(xintercept = <span class="r-func">mean</span>(score)), color = <span class="r-string">"#c4870a"</span>,
+             linewidth = <span class="r-num">1.2</span>, linetype = <span class="r-string">"dashed"</span>) +
+  <span class="r-func">geom_vline</span>(<span class="r-func">aes</span>(xintercept = <span class="r-func">median</span>(score)), color = <span class="r-string">"#1a6b6b"</span>,
+             linewidth = <span class="r-num">1.2</span>, linetype = <span class="r-string">"dotted"</span>) +
+  <span class="r-func">labs</span>(title = <span class="r-string">"成績分配直方圖"</span>, x = <span class="r-string">"成績"</span>, y = <span class="r-string">"人數"</span>,
+       caption = <span class="r-string">"金虛線 = 平均數；綠點線 = 中位數"</span>)
+
+<span class="r-comment"># 圖二：箱形圖（兩組比較 + 原始資料點）</span>
+<span class="r-func">ggplot</span>(scores, <span class="r-func">aes</span>(x = tutoring, y = score, fill = tutoring)) +
+  <span class="r-func">geom_boxplot</span>(alpha = <span class="r-num">0.75</span>, width = <span class="r-num">0.5</span>) +
+  <span class="r-func">geom_jitter</span>(width = <span class="r-num">0.1</span>, alpha = <span class="r-num">0.4</span>, size = <span class="r-num">1.5</span>) +
+  <span class="r-func">scale_fill_manual</span>(values = <span class="r-func">c</span>(<span class="r-string">"有補習"</span>=<span class="r-string">"#b8341b"</span>, <span class="r-string">"未補習"</span>=<span class="r-string">"#1a6b6b"</span>)) +
+  <span class="r-func">labs</span>(title = <span class="r-string">"有補習 vs 未補習成績比較（箱形圖）"</span>) +
+  <span class="r-func">theme</span>(legend.position = <span class="r-string">"none"</span>)</pre>
+    </div>
+  </div>
 </section>
 
 <hr class="unit-divider">
@@ -2271,6 +2337,35 @@ body {
         <li>A班標準差=5分，B班標準差=20分，兩班平均數都是75分。你會選哪班？為什麼？</li>
         <li>「偏差的平方和除以 n」和「除以 n−1」在什麼情況下差異較大？</li>
       </ul>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:32px;">
+    <h2 class="section-title">R 語法示範：集中趨勢與離散趨勢</h2>
+    <p style="font-size:14px;color:var(--ink-muted);margin-bottom:8px;">&#128193; <strong>對應語法檔：</strong>統計學_R語法與資料集.R → DATASET 1（scores 資料框）</p>
+    <div class="r-block">
+      <div class="r-block-label">mean / median / sd / var / summary / IQR</div>
+      <pre><span class="r-comment"># 集中趨勢</span>
+<span class="r-func">cat</span>(<span class="r-string">"平均數:"</span>, <span class="r-func">mean</span>(scores$score), <span class="r-string">"\n"</span>)
+<span class="r-func">cat</span>(<span class="r-string">"中位數:"</span>, <span class="r-func">median</span>(scores$score), <span class="r-string">"\n"</span>)
+mode_val &lt;- <span class="r-func">as.numeric</span>(<span class="r-func">names</span>(<span class="r-func">sort</span>(<span class="r-func">table</span>(scores$score), decreasing=<span class="r-kw">TRUE</span>)[<span class="r-num">1</span>]))
+<span class="r-func">cat</span>(<span class="r-string">"眾數:  "</span>, mode_val, <span class="r-string">"\n"</span>)
+
+<span class="r-comment"># 離散趨勢</span>
+<span class="r-func">cat</span>(<span class="r-string">"\n標準差 SD:"</span>, <span class="r-func">round</span>(<span class="r-func">sd</span>(scores$score), <span class="r-num">2</span>), <span class="r-string">"\n"</span>)
+<span class="r-comment"># 標準差 = 各資料點與平均數距離的「平均偏離程度」</span>
+<span class="r-func">cat</span>(<span class="r-string">"變異數 Var:"</span>, <span class="r-func">round</span>(<span class="r-func">var</span>(scores$score), <span class="r-num">2</span>), <span class="r-string">"\n"</span>)
+<span class="r-func">cat</span>(<span class="r-string">"全距  Range:"</span>, <span class="r-func">range</span>(scores$score), <span class="r-string">"\n"</span>)
+<span class="r-func">cat</span>(<span class="r-string">"IQR（四分位距）:"</span>, <span class="r-func">IQR</span>(scores$score), <span class="r-string">"\n"</span>)
+
+<span class="r-comment"># 五數摘要（min, Q1, 中位數, Q3, max）</span>
+<span class="r-func">print</span>(<span class="r-func">summary</span>(scores$score))
+
+<span class="r-comment"># 次數分配表</span>
+breaks &lt;- <span class="r-func">c</span>(<span class="r-num">40</span>,<span class="r-num">50</span>,<span class="r-num">60</span>,<span class="r-num">70</span>,<span class="r-num">80</span>,<span class="r-num">90</span>,<span class="r-num">100</span>)
+freq_t &lt;- <span class="r-func">cut</span>(scores$score, breaks=breaks, right=<span class="r-kw">TRUE</span>,
+              labels=<span class="r-func">c</span>(<span class="r-string">"40-50"</span>,<span class="r-string">"51-60"</span>,<span class="r-string">"61-70"</span>,<span class="r-string">"71-80"</span>,<span class="r-string">"81-90"</span>,<span class="r-string">"91-100"</span>))
+<span class="r-func">print</span>(<span class="r-func">table</span>(freq_t))</pre>
     </div>
   </div>
 
@@ -2889,16 +2984,1313 @@ body {
       <button class="quiz-btn" onclick="resetQuiz('quiz7')">重置</button>
     </div>
   </div>
+
+  <div class="section" style="margin-top:32px;">
+    <h2 class="section-title">R 語法示範：各種假設檢定</h2>
+    <p style="font-size:14px;color:var(--ink-muted);margin-bottom:8px;">&#128193; <strong>對應語法檔：</strong>統計學_R語法與資料集.R → DATASET 3–7</p>
+    <div class="r-block">
+      <div class="r-block-label">t.test / aov / TukeyHSD / chisq.test</div>
+      <pre><span class="r-comment"># 單樣本 t 檢定：班級平均是否不同於 70 分？</span>
+<span class="r-func">set.seed</span>(<span class="r-num">101</span>)
+class_scores &lt;- <span class="r-func">round</span>(<span class="r-func">rnorm</span>(<span class="r-num">30</span>, mean=<span class="r-num">74</span>, sd=<span class="r-num">8</span>))
+t1 &lt;- <span class="r-func">t.test</span>(class_scores, mu=<span class="r-num">70</span>, alternative=<span class="r-string">"two.sided"</span>)
+<span class="r-func">print</span>(t1)
+<span class="r-comment"># 看 t 值、df、p 值、95% CI 四個數字</span>
+
+<span class="r-comment"># 獨立樣本 t 檢定：有補習 vs 未補習</span>
+yes &lt;- scores[scores$tutoring==<span class="r-string">"有補習"</span>, <span class="r-string">"score"</span>]
+no  &lt;- scores[scores$tutoring==<span class="r-string">"未補習"</span>, <span class="r-string">"score"</span>]
+t2  &lt;- <span class="r-func">t.test</span>(yes, no, var.equal=<span class="r-kw">FALSE</span>)  <span class="r-comment"># Welch 校正版</span>
+<span class="r-func">print</span>(t2)
+
+<span class="r-comment"># 單因子 ANOVA：三種教學法</span>
+<span class="r-func">set.seed</span>(<span class="r-num">99</span>)
+anova_data &lt;- <span class="r-func">data.frame</span>(
+  method = <span class="r-func">rep</span>(<span class="r-func">c</span>(<span class="r-string">"傳統講授"</span>,<span class="r-string">"翻轉教室"</span>,<span class="r-string">"線上自學"</span>), each=<span class="r-num">20</span>),
+  score  = <span class="r-func">c</span>(<span class="r-func">round</span>(<span class="r-func">rnorm</span>(<span class="r-num">20</span>,<span class="r-num">70</span>,<span class="r-num">8</span>)), <span class="r-func">round</span>(<span class="r-func">rnorm</span>(<span class="r-num">20</span>,<span class="r-num">77</span>,<span class="r-num">8</span>)),
+                <span class="r-func">round</span>(<span class="r-func">rnorm</span>(<span class="r-num">20</span>,<span class="r-num">73</span>,<span class="r-num">9</span>)))
+)
+aov_r &lt;- <span class="r-func">aov</span>(score ~ method, data=anova_data)
+<span class="r-func">print</span>(<span class="r-func">summary</span>(aov_r))       <span class="r-comment"># F 值與 p 值</span>
+<span class="r-func">print</span>(<span class="r-func">TukeyHSD</span>(aov_r))     <span class="r-comment"># 事後比較：哪兩組顯著不同</span>
+
+<span class="r-comment"># 卡方檢定：性別 × 態度</span>
+chi_data &lt;- <span class="r-func">data.frame</span>(
+  gender  = <span class="r-func">c</span>(<span class="r-func">rep</span>(<span class="r-string">"男"</span>,<span class="r-num">100</span>), <span class="r-func">rep</span>(<span class="r-string">"女"</span>,<span class="r-num">100</span>)),
+  support = <span class="r-func">c</span>(<span class="r-func">rep</span>(<span class="r-string">"支持"</span>,<span class="r-num">55</span>), <span class="r-func">rep</span>(<span class="r-string">"不支持"</span>,<span class="r-num">45</span>),
+              <span class="r-func">rep</span>(<span class="r-string">"支持"</span>,<span class="r-num">69</span>), <span class="r-func">rep</span>(<span class="r-string">"不支持"</span>,<span class="r-num">31</span>))
+)
+<span class="r-func">print</span>(<span class="r-func">chisq.test</span>(<span class="r-func">table</span>(chi_data$gender, chi_data$support)))</pre>
+    </div>
+  </div>
 </section>
 
 </section>
 
-<!-- ══ FOOTER ══ -->
 <footer class="footer">
-  量化分析：統計學入門 ｜ 國立清華大學資訊系統與應用研究所 ｜ 陳奕如 | coffee.cheniju&#64;gmail.com</a>
-
+  量化分析：統計學入門 ｜ 國立清華大學資訊系統與應用研究所 ｜ 陳奕如 ｜ coffee.cheniju&#64;gmail.com
 </footer>
+</div>
+</div>
 
+<!-- ══════════════ 第二講 ══════════════ -->
+<div class="tab-pane" id="tab-lec2">
+<div class="page-wrap">
+
+<nav class="toc">
+  <div class="toc-title">第二講 — 2026/04/25 課程目錄</div>
+  <ol>
+    <li><a href="javascript:void(0)" onclick="navToUnit('tab-lec2','unit8')">機率基礎概念</a></li>
+    <li><a href="javascript:void(0)" onclick="navToUnit('tab-lec2','unit9')">抽樣方法與抽樣分配</a></li>
+    <li><a href="javascript:void(0)" onclick="navToUnit('tab-lec2','unit10')">統計估計與信賴區間</a></li>
+    <li><a href="javascript:void(0)" onclick="navToUnit('tab-lec2','unit11')">假設檢定深入</a></li>
+    <li><a href="javascript:void(0)" onclick="navToUnit('tab-lec2','unit12')">相關與簡單迴歸分析</a></li>
+    <li><a href="javascript:void(0)" onclick="navToUnit('tab-lec2','unit13')">複迴歸分析入門</a></li>
+  </ol>
+</nav>
+
+<section class="unit" id="unit8">
+  <div class="unit-header">
+    <div><div class="unit-num">UNIT 08</div></div>
+    <div><div class="unit-title">機率基礎概念</div></div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">為什麼要學機率？</h2>
+    <p>統計推論的核心問題是：「我抽到的樣本結果，有多大可能是偶然發生的？」回答這個問題，需要用到機率的語言。機率是連結「樣本觀察」和「母體推論」的橋樑。</p>
+    <div class="def-box">
+      <strong>機率（Probability）：</strong>某一事件發生的可能性大小，以 0 到 1 之間的數字表示。<br><br>
+      P = 0　→　該事件<strong>不可能</strong>發生<br>
+      P = 1　→　該事件<strong>必然</strong>發生<br>
+      P = 0.5 → 類似丟銅板，各半的機率
+    </div>
+    <div class="gold-box">
+      💡 <strong>生活中的機率例子：</strong>選舉民調說「支持率 60%，誤差 ±3%」，這個「誤差範圍」就是用機率計算出來的。統計顯著性（p 值）也是一種機率——它告訴你：「如果虛無假設是對的，抽到這種結果的機率有多低？」
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">機率的三種理解方式</h2>
+    <table class="scale-table">
+      <thead>
+        <tr><th>類型</th><th>概念</th><th>例子</th><th>研究應用</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>古典機率</td>
+          <td>所有結果等可能發生<br>P = 有利結果數 / 全部結果數</td>
+          <td>丟骰子出現6的機率 = 1/6</td>
+          <td>理論基礎</td>
+        </tr>
+        <tr>
+          <td>頻率機率</td>
+          <td>大量重複實驗後，事件發生的<strong>相對次數</strong></td>
+          <td>投擲硬幣10,000次，正面約5,000次</td>
+          <td>問卷調查的比例</td>
+        </tr>
+        <tr>
+          <td>主觀機率</td>
+          <td>根據個人知識與經驗的主觀判斷</td>
+          <td>「我認為今年台灣GDP成長機率是70%」</td>
+          <td>貝氏統計的基礎</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="gold-box" style="margin-top:12px;">
+      💡 <strong>貝氏統計（Bayesian Statistics）簡介：</strong>與傳統（頻率派）統計不同，貝氏統計允許研究者將<strong>事前知識（prior）</strong>納入分析，透過觀察到的資料更新對母體的信念，得到<strong>後驗分配（posterior）</strong>。例如：初步研究認為新藥有效的機率是 60%，收到新的臨床試驗結果後，可更新這個估計。貝氏統計在機器學習、醫學研究中應用廣泛，初等統計通常以頻率派方法為主，貝氏為進階選修內容。
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">常態分配：統計學的核心</h2>
+    <p>常態分配（Normal Distribution）是統計學中最重要的機率分配，又稱「鐘型曲線」。大多數社會現象（身高、考試成績、民調支持率）都接近常態分配。如果抽樣會導致偏差時，將會進行加權(weight)來讓樣本膨脹或縮減到符合常態分布。</p>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;width:100%;">
+        <defs>
+          <!-- 68% fill -->
+          <clipPath id="clip68">
+            <rect x="196" y="0" width="168" height="220"/>
+          </clipPath>
+          <!-- 95% fill -->
+          <clipPath id="clip95">
+            <rect x="112" y="0" width="336" height="220"/>
+          </clipPath>
+        </defs>
+
+        <!-- 95% area -->
+        <path d="M112,160 Q140,155 168,130 Q196,80 224,50 Q252,25 280,20 Q308,25 336,50 Q364,80 392,130 Q420,155 448,160 Z" fill="#c8e0e0" opacity="0.5"/>
+        <!-- 68% area -->
+        <path d="M196,160 Q210,120 224,80 Q252,32 280,20 Q308,32 336,80 Q350,120 364,160 Z" fill="#1a6b6b" opacity="0.35"/>
+
+        <!-- Bell curve -->
+        <path d="M60,165 Q80,163 112,160 Q140,155 168,130 Q196,80 224,50 Q252,25 280,20 Q308,25 336,50 Q364,80 392,130 Q420,155 448,160 Q480,163 500,165" fill="none" stroke="#1a1814" stroke-width="2.5"/>
+
+        <!-- Mean line -->
+        <line x1="280" y1="20" x2="280" y2="170" stroke="#b8341b" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="280" y="182" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="13" fill="#b8341b" font-weight="600">μ</text>
+
+        <!-- SD markers -->
+        <line x1="196" y1="155" x2="196" y2="170" stroke="#1a6b6b" stroke-width="1.5"/>
+        <line x1="364" y1="155" x2="364" y2="170" stroke="#1a6b6b" stroke-width="1.5"/>
+        <text x="196" y="182" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="11" fill="#1a6b6b">μ−σ</text>
+        <text x="364" y="182" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="11" fill="#1a6b6b">μ+σ</text>
+
+        <line x1="112" y1="158" x2="112" y2="170" stroke="#7a756e" stroke-width="1.2"/>
+        <line x1="448" y1="158" x2="448" y2="170" stroke="#7a756e" stroke-width="1.2"/>
+        <text x="112" y="182" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="11" fill="#7a756e">μ−2σ</text>
+        <text x="448" y="182" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="11" fill="#7a756e">μ+2σ</text>
+
+        <!-- Labels -->
+        <text x="280" y="60" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="13" fill="white" font-weight="700">68%</text>
+        <text x="155" y="140" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="11" fill="#1a6b6b">95%</text>
+        <text x="405" y="140" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="11" fill="#1a6b6b">95%</text>
+
+        <!-- Brace for 95% -->
+        <line x1="112" y1="198" x2="448" y2="198" stroke="#7a756e" stroke-width="1.2"/>
+        <line x1="112" y1="193" x2="112" y2="203" stroke="#7a756e" stroke-width="1.2"/>
+        <line x1="448" y1="193" x2="448" y2="203" stroke="#7a756e" stroke-width="1.2"/>
+        <text x="280" y="214" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="12" fill="#7a756e">μ ± 2σ 涵蓋約 95% 的資料</text>
+      </svg>
+      <div class="diagram-caption">圖 8-1　常態分配與 68–95–99.7 法則</div>
+    </div>
+
+    <ul class="def-list">
+      <li><strong>μ ± 1σ：</strong>涵蓋約 <strong>68%</strong> 的資料</li>
+      <li><strong>μ ± 2σ：</strong>涵蓋約 <strong>95%</strong> 的資料（信賴區間的基礎）</li>
+      <li><strong>μ ± 3σ：</strong>涵蓋約 <strong>99.7%</strong> 的資料</li>
+    </ul>
+
+    <div class="teal-box">
+      <strong>標準化（Z-score）：</strong>將任何常態分配轉換為「標準常態分配」（μ=0, σ=1）的過程。<br><br>
+      <span style="font-family:'Source Code Pro',monospace;font-size:15px;">Z = (X − μ) / σ</span><br><br>
+      Z 值的絕對意義：「這個觀測值距離平均數有幾個標準差？」例如：Z = 2，代表高於平均數 2 個標準差，屬於前約 2.3%。
+    </div>
+  </div>
+
+  <!-- QUIZ 8 -->
+  <div class="quiz-block" id="quiz8">
+    <div class="quiz-header">
+      <div class="quiz-badge">QUIZ 08</div>
+      <div class="quiz-title">機率基礎｜觀念確認</div>
+    </div>
+
+    <div class="quiz-q" id="q8_1">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q1.</span>某項心理測驗的全國平均分數為 100，標準差為 15（接近常態分配）。請問分數落在 85 到 115 之間的人，大約佔全體的多少？</div>
+      <ul class="quiz-options">
+        <li onclick="mcq(this,'q8_1')">（A）約 50%</li>
+        <li onclick="mcq(this,'q8_1')" data-ans="true">（B）約 68%</li>
+        <li onclick="mcq(this,'q8_1')">（C）約 95%</li>
+        <li onclick="mcq(this,'q8_1')">（D）約 99.7%</li>
+      </ul>
+    </div>
+
+    <div class="quiz-q" id="q8_2">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q2.</span>某同學的英文成績為 80 分，班級平均為 70 分，標準差為 10 分。這位同學的 Z 值是多少？</div>
+      <ul class="quiz-options">
+        <li onclick="mcq(this,'q8_2')">（A）0.5</li>
+        <li onclick="mcq(this,'q8_2')" data-ans="true">（B）1.0</li>
+        <li onclick="mcq(this,'q8_2')">（C）1.5</li>
+        <li onclick="mcq(this,'q8_2')">（D）2.0</li>
+      </ul>
+    </div>
+
+    <div class="quiz-q" id="q8_3">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q3.</span>統計上的 p 值本質上是一種機率，請說明 p 值的意義是「哪件事的機率」？</div>
+      <div class="quiz-short"><textarea placeholder="請用自己的話說明…"></textarea></div>
+      <div class="quiz-answer" id="q8_3_ans">
+        <strong>參考答案：</strong>p 值是「<strong>假設虛無假設（H₀）為真的情況下</strong>，觀察到目前樣本結果（或更極端結果）的機率」。p 值越小，代表在 H₀ 成立的前提下，這種樣本結果越不可能偶然發生，因此對 H₀ 的懷疑程度越強。
+      </div>
+    </div>
+    <div class="quiz-btn-row">
+      <button class="quiz-btn primary" onclick="showAllAnswers('quiz8')">顯示所有解答</button>
+      <button class="quiz-btn" onclick="resetQuiz('quiz8')">重置</button>
+    </div>
+  </div>
+</section>
+
+<hr class="unit-divider">
+
+<!-- ══════════════════════════════════ -->
+<!-- UNIT 9：抽樣方法與抽樣分配 -->
+<!-- ══════════════════════════════════ -->
+<section class="unit" id="unit9">
+  <div class="unit-header">
+    <div><div class="unit-num">UNIT 09</div></div>
+    <div><div class="unit-title">抽樣方法與抽樣分配</div></div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">為什麼抽樣方法很重要？</h2>
+    <p>一份研究的結論是否能推論到母體，很大程度取決於<strong>抽樣方法是否公正</strong>。若樣本不具代表性，再精密的統計分析也無法挽救。</p>
+    <div class="def-box">
+      <strong>抽樣誤差（Sampling Error）：</strong>樣本統計量（如 X̄）與母體參數（如 μ）之間的差距。只要不做普查，抽樣誤差就必然存在，但可以透過<strong>增大樣本數</strong>來降低。
+    </div>
+    <div class="teal-box">
+      <strong>樣本數、誤差與研究成本的三角關係：</strong><br>
+      增大樣本數可以減少抽樣誤差，使估計更精確——但代價是<strong>時間、金錢與人力成本的上升</strong>。研究者需要在「精確度」與「可行成本」之間做出平衡。<br><br>
+      ▸ 樣本數加倍，誤差只能縮小約 <strong>30%</strong>（因誤差與 √n 成反比）<br>
+      ▸ 要將誤差縮小為原來的 <strong>1/2</strong>，樣本數需增加到原來的 <strong>4 倍</strong><br>
+      ▸ 學術研究通常透過「<strong>事前檢定力分析（Power Analysis）</strong>」決定最低所需樣本數，以在有限預算內達到足夠的統計檢定力。
+    </div>
+    <div class="def-box" style="border-left-color: var(--gold); background: var(--gold-light); border-color: #e0c88a;">
+      <strong style="color: var(--gold);">非抽樣誤差（Non-sampling Error）：</strong>與抽樣過程無關的錯誤，例如問卷設計不良、訪員偏誤、拒訪、測量工具問題等。增大樣本數<strong>無法</strong>改善非抽樣誤差，只能透過研究設計來減少。
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">常見抽樣方法</h2>
+    <div class="sampling-grid">
+      <div class="sampling-card">
+        <div class="sampling-card-title">
+          簡單隨機抽樣（Simple Random Sampling）
+          <span class="sampling-card-tag tag-random">機率抽樣</span>
+        </div>
+        <p>母體中每個個體被選中的機率<strong>完全相等</strong>。最理想的抽樣方式，但需要完整的母體名單（抽樣框）。<br><br>
+        <strong>例：</strong>從全校5000名學生名單中，以亂數表隨機抽出200人</p>
+      </div>
+      <div class="sampling-card">
+        <div class="sampling-card-title">
+          系統抽樣（Systematic Sampling）
+          <span class="sampling-card-tag tag-random">機率抽樣</span>
+        </div>
+        <p>確定抽樣間隔 k = N/n，隨機選定起始點後，每隔 k 個抽一個。<br><br>
+        <strong>例：</strong>1000份問卷中要抽100份，k=10；從第7份起，每隔10份抽一份（7、17、27…）</p>
+      </div>
+      <div class="sampling-card">
+        <div class="sampling-card-title">
+          分層抽樣（Stratified Sampling）
+          <span class="sampling-card-tag tag-random">機率抽樣</span>
+        </div>
+        <p>先將母體依特定特徵（如年齡、性別）分成若干<strong>層（strata）</strong>，再在各層內進行隨機抽樣。<br><br>
+        <strong>例：</strong>研究台灣閱讀習慣，依年齡層分20-39、40-59、60+，各層按比例抽樣</p>
+      </div>
+      <div class="sampling-card">
+        <div class="sampling-card-title">
+          叢集抽樣（Cluster Sampling）
+          <span class="sampling-card-tag tag-random">機率抽樣</span>
+        </div>
+        <p>將母體分成若干<strong>群（cluster）</strong>，隨機抽取部分群，再對被選中的群進行全面調查或再次抽樣。<br><br>
+        <strong>例：</strong>研究台灣中小學生，先隨機抽20所學校，再對各校全體學生施測</p>
+      </div>
+      <div class="sampling-card">
+        <div class="sampling-card-title">
+          立意抽樣（Purposive Sampling）
+          <span class="sampling-card-tag tag-nonrandom">非機率抽樣</span>
+        </div>
+        <p>依研究者的判斷與目的，有意識地選取具代表性或特殊意義的個體。<br><br>
+        <strong>例：</strong>研究媒體識讀，特意選取新聞科系、教育學系學生作為受訪者</p>
+      </div>
+      <div class="sampling-card">
+        <div class="sampling-card-title">
+          便利抽樣（Convenience Sampling）
+          <span class="sampling-card-tag tag-nonrandom">非機率抽樣</span>
+        </div>
+        <p>選取最容易取得的個體，通常用於探索性研究或前測，<strong>不適合推論母體</strong>。<br><br>
+        <strong>例：</strong>在學校門口詢問路過的學生填問卷；用自己的 Facebook 好友作為研究對象</p>
+      </div>
+    </div>
+    <div class="gold-box">
+      💡 <strong>量化研究論文的關鍵：</strong>只有<strong>機率抽樣</strong>才能進行統計推論（把結果推廣到母體）。若使用便利抽樣，結論只能描述這批受訪者，論文中需明確說明此限制。
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">抽樣分配與中央極限定理</h2>
+    <p>假設我們重複從母體中抽取樣本，每次計算樣本平均數 X̄，把所有這些 X̄ 的分配畫出來，就得到「<strong>抽樣分配（Sampling Distribution）</strong>」。</p>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" style="max-width:620px;width:100%;">
+        <defs>
+          <marker id="arr_s" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#1a1814"/>
+          </marker>
+        </defs>
+
+        <!-- Population (skewed) -->
+        <text x="80" y="18" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="12" fill="#7a756e">母體分配（右偏）</text>
+        <path d="M20,140 Q30,140 50,120 Q70,80 90,60 Q100,55 105,60 Q110,70 120,100 Q130,120 145,130 Q155,135 165,138 Q175,140 185,140" fill="#e8c5bb" stroke="#b8341b" stroke-width="1.5" opacity="0.8"/>
+
+        <!-- Arrow 1 -->
+        <line x1="195" y1="90" x2="245" y2="90" stroke="#1a1814" stroke-width="1.5" marker-end="url(#arr_s)"/>
+        <text x="220" y="80" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="10" fill="#7a756e">n=10</text>
+        <text x="220" y="105" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="10" fill="#7a756e">重複抽樣</text>
+
+        <!-- n=10 distribution (slightly better) -->
+        <text x="320" y="18" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="12" fill="#7a756e">X̄ 的分配 (n=10)</text>
+        <path d="M255,140 Q270,138 285,120 Q300,85 320,60 Q340,85 355,120 Q370,138 385,140" fill="#c8e0e0" stroke="#1a6b6b" stroke-width="1.5" opacity="0.8"/>
+
+        <!-- Arrow 2 -->
+        <line x1="398" y1="90" x2="448" y2="90" stroke="#1a1814" stroke-width="1.5" marker-end="url(#arr_s)"/>
+        <text x="423" y="80" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="10" fill="#7a756e">n=200</text>
+        <text x="423" y="105" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="10" fill="#7a756e">樣本數↑</text>
+
+        <!-- n=200 distribution (very normal) -->
+        <text x="540" y="18" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="12" fill="#1a6b6b">X̄ 的分配 (n=200)</text>
+        <path d="M460,140 Q470,139 485,130 Q500,100 510,65 Q520,40 540,32 Q560,40 570,65 Q580,100 595,130 Q610,139 620,140" fill="#c8e0e0" stroke="#1a6b6b" stroke-width="2" opacity="0.9"/>
+
+        <!-- Baseline -->
+        <line x1="20" y1="141" x2="185" y2="141" stroke="#d8d0c4" stroke-width="1"/>
+        <line x1="255" y1="141" x2="385" y2="141" stroke="#d8d0c4" stroke-width="1"/>
+        <line x1="460" y1="141" x2="620" y2="141" stroke="#d8d0c4" stroke-width="1"/>
+
+        <!-- Normal label -->
+        <text x="540" y="160" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="11" fill="#1a6b6b" font-weight="600">趨近常態分配 ✓</text>
+      </svg>
+      <div class="diagram-caption">圖 9-1　中央極限定理：不論母體形狀，樣本數夠大時 X̄ 的分配趨近常態</div>
+    </div>
+
+    <div class="teal-box">
+      <strong>中央極限定理（Central Limit Theorem, CLT）：</strong><br>
+      無論母體的分配形狀為何，當樣本數 n 夠大（通常 n ≥ 30），樣本平均數 X̄ 的抽樣分配會趨近於常態分配。<br><br>
+      X̄ 的抽樣分配特性：<br>
+      &nbsp;&nbsp;&nbsp;• <strong>平均而言，</strong>X̄ 的期望值 = μ（即在大量重複抽樣下，樣本平均數的均值趨近母體均值）<br>
+      &nbsp;&nbsp;&nbsp;• 標準差 = σ / √n　→ 稱為<strong>標準誤（Standard Error, SE）</strong><br><br>
+      <strong>重要意義：</strong>n 越大，SE 越小，X̄ 越接近 μ，估計越精確。這也說明了為什麼大樣本的研究更可信。
+    </div>
+
+    <div class="formula-block">
+      標準誤（SE）= σ / √n<br>
+      <span style="font-size:13px;color:var(--ink-muted);">n 增加為原來的 4 倍，SE 縮小為原來的 1/2</span>
+    </div>
+    <div class="two-col" style="margin-top:16px;">
+      <div class="def-box">
+        <strong>標準差（Standard Deviation, SD）</strong><br>
+        描述<strong>個別觀測值</strong>與平均數之間的平均距離。<br>
+        是資料本身離散程度的量測。<br><br>
+        ▸ 對象：原始資料點<br>
+        ▸ 公式：s = √[Σ(xᵢ−X̄)² / (n−1)]<br>
+        ▸ 例：「成績的標準差 = 10 分」
+      </div>
+      <div class="teal-box">
+        <strong>標準誤（Standard Error, SE）</strong><br>
+        描述<strong>樣本平均數 X̄</strong> 的抽樣變異程度。<br>
+        是估計量精確度的量測。<br><br>
+        ▸ 對象：樣本平均數<br>
+        ▸ 公式：SE = s / √n<br>
+        ▸ 例：「平均成績的標準誤 = 1.4 分」
+      </div>
+    </div>
+    <div class="gold-box">
+      💡 <strong>觀念釐清</strong>標準差描述「資料有多散」；標準誤描述「我的估計（X̄）有多準」。樣本數越大，標準誤越小，X̄ 越接近真實 μ，但標準差不會因樣本數增加而縮小。
+    </div>
+
+    <!-- R Code -->
+    <div class="r-block">
+      <div class="r-block-label">R 語法示範 — 中央極限定理視覺化</div>
+      <pre><span class="r-comment"># 模擬中央極限定理：從右偏母體重複抽樣</span>
+<span class="r-func">set.seed</span>(<span class="r-num">42</span>)
+<span class="r-var">n_sim</span> &lt;- <span class="r-num">5000</span>  <span class="r-comment"># 模擬次數</span>
+
+<span class="r-comment"># 母體：右偏分配（指數分配）</span>
+<span class="r-var">means_n10</span>  &lt;- <span class="r-func">replicate</span>(<span class="r-var">n_sim</span>, <span class="r-func">mean</span>(<span class="r-func">rexp</span>(<span class="r-num">10</span>,  rate = <span class="r-num">1</span>)))
+<span class="r-var">means_n50</span>  &lt;- <span class="r-func">replicate</span>(<span class="r-var">n_sim</span>, <span class="r-func">mean</span>(<span class="r-func">rexp</span>(<span class="r-num">50</span>,  rate = <span class="r-num">1</span>)))
+<span class="r-var">means_n200</span> &lt;- <span class="r-func">replicate</span>(<span class="r-var">n_sim</span>, <span class="r-func">mean</span>(<span class="r-func">rexp</span>(<span class="r-num">200</span>, rate = <span class="r-num">1</span>)))
+
+<span class="r-comment"># 合併資料並繪圖</span>
+<span class="r-var">df_clt</span> &lt;- <span class="r-func">data.frame</span>(
+  means = <span class="r-func">c</span>(<span class="r-var">means_n10</span>, <span class="r-var">means_n50</span>, <span class="r-var">means_n200</span>),
+  n     = <span class="r-func">rep</span>(<span class="r-func">c</span>(<span class="r-string">"n = 10"</span>, <span class="r-string">"n = 50"</span>, <span class="r-string">"n = 200"</span>), each = <span class="r-var">n_sim</span>)
+)
+
+<span class="r-func">ggplot</span>(<span class="r-var">df_clt</span>, <span class="r-func">aes</span>(x = means, fill = n)) +
+  <span class="r-func">geom_histogram</span>(binwidth = <span class="r-num">0.04</span>, color = <span class="r-string">"white"</span>, alpha = <span class="r-num">0.85</span>) +
+  <span class="r-func">facet_wrap</span>(~n, ncol = <span class="r-num">3</span>) +
+  <span class="r-func">scale_fill_manual</span>(values = <span class="r-func">c</span>(<span class="r-string">"#e8c5bb"</span>, <span class="r-string">"#c8e0e0"</span>, <span class="r-string">"#1a6b6b"</span>)) +
+  <span class="r-func">labs</span>(title = <span class="r-string">"中央極限定理：樣本平均數的抽樣分配"</span>,
+       x = <span class="r-string">"樣本平均數 X̄"</span>, y = <span class="r-string">"次數"</span>) +
+  <span class="r-func">theme</span>(legend.position = <span class="r-string">"none"</span>)</pre>
+    </div>
+  </div>
+
+  <!-- QUIZ 9 -->
+  <div class="quiz-block" id="quiz9">
+    <div class="quiz-header">
+      <div class="quiz-badge">QUIZ 09</div>
+      <div class="quiz-title">抽樣方法｜觀念確認</div>
+    </div>
+
+    <div class="quiz-q" id="q9_1">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q1.</span>某研究者在台北某捷運站出口，攔截路過行人進行問卷調查。這屬於哪一種抽樣方法？</div>
+      <ul class="quiz-options">
+        <li onclick="mcq(this,'q9_1')">（A）簡單隨機抽樣</li>
+        <li onclick="mcq(this,'q9_1')">（B）分層抽樣</li>
+        <li onclick="mcq(this,'q9_1')" data-ans="true">（C）便利抽樣</li>
+        <li onclick="mcq(this,'q9_1')">（D）系統抽樣</li>
+      </ul>
+    </div>
+
+    <div class="quiz-q" id="q9_2">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q2.</span>根據中央極限定理，若某母體的標準差 σ = 20，當樣本數從 n=25 增加到 n=100，標準誤（SE）會如何變化？</div>
+      <ul class="quiz-options">
+        <li onclick="mcq(this,'q9_2')">（A）從 4 縮小到 1</li>
+        <li onclick="mcq(this,'q9_2')" data-ans="true">（B）從 4 縮小到 2</li>
+        <li onclick="mcq(this,'q9_2')">（C）從 20 縮小到 5</li>
+        <li onclick="mcq(this,'q9_2')">（D）從 20 縮小到 10</li>
+      </ul>
+    </div>
+
+    <div class="quiz-q" id="q9_3">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q3.</span>研究圖文傳播所學生的閱讀習慣，若研究者只發問卷給在職班同學（因為容易取得），這樣的研究在推論上有何限制？請說明。</div>
+      <div class="quiz-short"><textarea placeholder="請說明此研究的推論限制…"></textarea></div>
+      <div class="quiz-answer" id="q9_3_ans">
+        <strong>參考答案：</strong>此研究採用<strong>便利抽樣</strong>，樣本僅代表在職班學生，但在職班學生（通常已有工作、年齡偏高）與全體圖文傳播相關從業人員或一般大眾可能有系統性差異。因此研究結論<strong>不能推論至更廣泛的母體</strong>，論文中需明確說明研究限制，並建議未來研究採用更具代表性的抽樣方式。
+      </div>
+    </div>
+    <div class="quiz-btn-row">
+      <button class="quiz-btn primary" onclick="showAllAnswers('quiz9')">顯示所有解答</button>
+      <button class="quiz-btn" onclick="resetQuiz('quiz9')">重置</button>
+    </div>
+  </div>
+</section>
+
+<hr class="unit-divider">
+
+<!-- ══════════════════════════════════ -->
+<!-- UNIT 10：統計估計與信賴區間 -->
+<!-- ══════════════════════════════════ -->
+<section class="unit" id="unit10">
+  <div class="unit-header">
+    <div><div class="unit-num">UNIT 10</div></div>
+    <div><div class="unit-title">統計估計與信賴區間</div></div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">點估計 vs 區間估計</h2>
+    <p>推論統計的第一步，是用樣本來<strong>估計</strong>母體的未知參數。估計有兩種形式：</p>
+    <div class="two-col">
+      <div class="def-box">
+        <strong>點估計（Point Estimation）</strong><br>
+        用單一數值估計母體參數。<br><br>
+        例：「根據問卷，學生平均每天閱讀 <strong>2.3 小時</strong>」<br><br>
+        優點：直覺簡單<br>
+        缺點：無法知道這個估計值有多可靠
+      </div>
+      <div class="teal-box">
+        <strong>區間估計（Interval Estimation）</strong><br>
+        提供一個<strong>範圍</strong>，並說明對這個範圍的信心程度。<br><br>
+        例：「根據統計，在95% 信賴區間內，學生每日閱讀為 <strong>2.1 到 2.5 小時</strong>」<br><br>
+        優點：呈現不確定性，更誠實<br>
+        缺點：較複雜，需要解釋
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">信賴區間（Confidence Interval, CI）</h2>
+    <p>信賴區間是統計報告中最常見的概念之一，也最常被誤解。</p>
+
+    <div class="def-box">
+      <strong>95% 信賴區間的正確解釋：</strong><br>
+      如果我們重複進行 100 次同樣的抽樣流程，每次計算一個信賴區間，其中大約 <strong>95 個</strong>區間會包含真實的母體參數 μ。
+    </div>
+
+    <div class="gold-box">
+      ⚠️ <strong>常見錯誤解釋：</strong>「母體參數有 95% 的機率落在這個區間內」—— 這是錯的！母體參數是固定的（只是我們不知道），不存在機率問題。是「這個流程構造的區間」有 95% 的機率包含參數，而非「這個特定區間」有 95% 的機率。
+    </div>
+    <div class="teal-box">
+      <strong>&#128221; 學術論文寫法範例：</strong><br><br>
+      <strong>【方法段】</strong><br>
+      <em>「本研究以獨立樣本 T 檢定比較兩組平均數，並以 Bootstrap 法（重複抽樣 1,000 次）構建 95% 信賴區間。」</em><br><br>
+      <strong>【結果段】</strong><br>
+      <em>「結果發現，有補習組的期末成績（M = 78.2, SD = 8.4）顯著高於未補習組（M = 72.1, SD = 10.3），t(48) = 2.31, p = .025, 95% CI [0.83, 11.37]，Cohen's d = 0.65。」</em><br><br>
+      解讀：信賴區間 [0.83, 11.37] 表示在此研究設計下，有補習組與未補習組的成績差距之 95% CI 不包含 0，支持兩組確實有差異的結論。
+    </div>
+
+    <div class="formula-block">
+      95% 信賴區間公式（大樣本，σ 已知）：<br>
+      <span style="font-size:16px;font-weight:700;">X̄ ± 1.96 × (σ / √n)</span><br>
+      <span style="font-size:13px;color:var(--ink-muted);">1.96 是標準常態分配的 95% 臨界值（Z值）</span><br><br>
+      若 σ 未知（通常如此），用樣本標準差 s 和 t 分配：<br>
+      <span style="font-size:16px;font-weight:700;">X̄ ± t(α/2, n-1) × (s / √n)</span>
+    </div>
+
+    <!-- CI 圖示 -->
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 560 180" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;width:100%;">
+        <defs>
+          <marker id="arr_ci" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#1a1814"/>
+          </marker>
+        </defs>
+
+        <!-- True μ line -->
+        <line x1="280" y1="20" x2="280" y2="165" stroke="#b8341b" stroke-width="2" stroke-dasharray="6,3"/>
+        <text x="280" y="14" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="12" fill="#b8341b" font-weight="600">真實 μ（未知）</text>
+
+        <!-- Sample CI bars -->
+        <!-- CI 1: contains μ -->
+        <line x1="230" y1="35" x2="330" y2="35" stroke="#1a6b6b" stroke-width="3"/>
+        <line x1="230" y1="29" x2="230" y2="41" stroke="#1a6b6b" stroke-width="2"/>
+        <line x1="330" y1="29" x2="330" y2="41" stroke="#1a6b6b" stroke-width="2"/>
+        <circle cx="280" cy="35" r="4" fill="#1a6b6b"/>
+        <text x="340" y="39" font-family="Noto Sans TC,sans-serif" font-size="11" fill="#1a6b6b">第1次：包含 μ ✓</text>
+
+        <!-- CI 2: contains μ -->
+        <line x1="240" y1="58" x2="325" y2="58" stroke="#1a6b6b" stroke-width="3"/>
+        <line x1="240" y1="52" x2="240" y2="64" stroke="#1a6b6b" stroke-width="2"/>
+        <line x1="325" y1="52" x2="325" y2="64" stroke="#1a6b6b" stroke-width="2"/>
+        <circle cx="283" cy="58" r="4" fill="#1a6b6b"/>
+        <text x="340" y="62" font-family="Noto Sans TC,sans-serif" font-size="11" fill="#1a6b6b">第2次：包含 μ ✓</text>
+
+        <!-- CI 3: misses μ (shifted right) -->
+        <line x1="295" y1="81" x2="390" y2="81" stroke="#b8341b" stroke-width="3"/>
+        <line x1="295" y1="75" x2="295" y2="87" stroke="#b8341b" stroke-width="2"/>
+        <line x1="390" y1="75" x2="390" y2="87" stroke="#b8341b" stroke-width="2"/>
+        <circle cx="343" cy="81" r="4" fill="#b8341b"/>
+        <text x="340" y="98" font-family="Noto Sans TC,sans-serif" font-size="11" fill="#b8341b">第3次：未包含 μ ✗（約5%的情況）</text>
+
+        <!-- CI 4: contains μ -->
+        <line x1="218" y1="112" x2="318" y2="112" stroke="#1a6b6b" stroke-width="3"/>
+        <line x1="218" y1="106" x2="218" y2="118" stroke="#1a6b6b" stroke-width="2"/>
+        <line x1="318" y1="106" x2="318" y2="118" stroke="#1a6b6b" stroke-width="2"/>
+        <circle cx="268" cy="112" r="4" fill="#1a6b6b"/>
+        <text x="340" y="116" font-family="Noto Sans TC,sans-serif" font-size="11" fill="#1a6b6b">第4次：包含 μ ✓</text>
+
+        <!-- CI 5: contains μ -->
+        <line x1="235" y1="135" x2="340" y2="135" stroke="#1a6b6b" stroke-width="3"/>
+        <line x1="235" y1="129" x2="235" y2="141" stroke="#1a6b6b" stroke-width="2"/>
+        <line x1="340" y1="129" x2="340" y2="141" stroke="#1a6b6b" stroke-width="2"/>
+        <circle cx="288" cy="135" r="4" fill="#1a6b6b"/>
+        <text x="340" y="139" font-family="Noto Sans TC,sans-serif" font-size="11" fill="#1a6b6b">第5次：包含 μ ✓</text>
+
+        <!-- Label -->
+        <text x="10" y="165" font-family="Noto Sans TC,sans-serif" font-size="11" fill="#7a756e">● = 各次抽樣的 X̄　　— 線段 = 95% CI　　100次中約95次包含真實 μ</text>
+      </svg>
+      <div class="diagram-caption">圖 10-1　95% 信賴區間的概念：100次抽樣中約95次的CI會包含真實μ<br><span style="font-size:12px;">（圖中紅色虛線代表「真實母體參數 μ」——即我們想估計但永遠無法直接測量到的真實值。每條線段代表一次抽樣所構建的信賴區間；綠色線段包含了真實 μ，紅色線段則沒有，約佔 5%。）</span></div>
+    </div>
+
+    <!-- R Code -->
+    <div class="r-block">
+      <div class="r-block-label">R 語法示範 — 計算信賴區間</div>
+      <pre><span class="r-comment"># 以第一份講義的成績資料為例</span>
+<span class="r-func">set.seed</span>(<span class="r-num">42</span>)
+<span class="r-var">scores</span> &lt;- <span class="r-func">round</span>(<span class="r-func">rnorm</span>(<span class="r-num">50</span>, mean = <span class="r-num">75</span>, sd = <span class="r-num">10</span>))
+
+<span class="r-comment"># 方法一：用 t.test 直接取得信賴區間</span>
+<span class="r-var">result</span> &lt;- <span class="r-func">t.test</span>(<span class="r-var">scores</span>)
+<span class="r-func">cat</span>(<span class="r-string">"95% 信賴區間："</span>, <span class="r-var">result</span>$conf.int, <span class="r-string">"\n"</span>)
+<span class="r-func">cat</span>(<span class="r-string">"樣本平均數："</span>, <span class="r-func">round</span>(<span class="r-func">mean</span>(<span class="r-var">scores</span>), <span class="r-num">2</span>), <span class="r-string">"\n"</span>)
+
+<span class="r-comment"># 方法二：手動計算（理解公式）</span>
+<span class="r-var">n</span>    &lt;- <span class="r-func">length</span>(<span class="r-var">scores</span>)
+<span class="r-var">xbar</span> &lt;- <span class="r-func">mean</span>(<span class="r-var">scores</span>)
+<span class="r-var">s</span>    &lt;- <span class="r-func">sd</span>(<span class="r-var">scores</span>)
+<span class="r-var">se</span>   &lt;- <span class="r-var">s</span> / <span class="r-func">sqrt</span>(<span class="r-var">n</span>)                          <span class="r-comment"># 標準誤</span>
+<span class="r-var">t_crit</span> &lt;- <span class="r-func">qt</span>(<span class="r-num">0.975</span>, df = <span class="r-var">n</span> - <span class="r-num">1</span>)              <span class="r-comment"># t 臨界值（自由度 n-1）</span>
+<span class="r-var">ci_lower</span> &lt;- <span class="r-var">xbar</span> - <span class="r-var">t_crit</span> * <span class="r-var">se</span>
+<span class="r-var">ci_upper</span> &lt;- <span class="r-var">xbar</span> + <span class="r-var">t_crit</span> * <span class="r-var">se</span>
+<span class="r-func">cat</span>(<span class="r-string">"手動計算 95% CI: ["</span>, <span class="r-func">round</span>(<span class="r-var">ci_lower</span>,<span class="r-num">2</span>), <span class="r-string">","</span>, <span class="r-func">round</span>(<span class="r-var">ci_upper</span>,<span class="r-num">2</span>), <span class="r-string">"]\n"</span>)</pre>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">樣本數如何影響信賴區間？</h2>
+    <table class="scale-table">
+      <thead>
+        <tr><th>樣本數 (n)</th><th>標準誤 SE（σ=10）</th><th>95% CI 寬度（約）</th><th>精確程度</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>n = 25</td><td>10/√25 = <strong>2.0</strong></td><td>約 ±3.9</td><td>較寬，不精確</td></tr>
+        <tr><td>n = 100</td><td>10/√100 = <strong>1.0</strong></td><td>約 ±1.96</td><td>中等</td></tr>
+        <tr><td>n = 400</td><td>10/√400 = <strong>0.5</strong></td><td>約 ±0.98</td><td>較窄，精確</td></tr>
+        <tr><td>n = 1000</td><td>10/√1000 ≈ <strong>0.32</strong></td><td>約 ±0.62</td><td>很精確</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- QUIZ 10 -->
+  <div class="quiz-block" id="quiz10">
+    <div class="quiz-header">
+      <div class="quiz-badge">QUIZ 10</div>
+      <div class="quiz-title">信賴區間｜觀念確認</div>
+    </div>
+
+    <div class="quiz-q" id="q10_1">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q1.</span>以下哪個是「95% 信賴區間」的正確解釋？</div>
+      <ul class="quiz-options">
+        <li onclick="mcq(this,'q10_1')">（A）母體平均數 μ 有 95% 的機率落在這個區間內</li>
+        <li onclick="mcq(this,'q10_1')" data-ans="true">（B）若重複抽樣 100 次，約有 95 次構造的區間會包含真實 μ</li>
+        <li onclick="mcq(this,'q10_1')">（C）樣本平均數有 95% 的機率等於母體平均數</li>
+        <li onclick="mcq(this,'q10_1')">（D）95% 的樣本資料落在此區間內</li>
+      </ul>
+    </div>
+
+    <div class="quiz-q" id="q10_2">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q2.</span>若研究者希望將 95% 信賴區間的寬度縮小為一半，需要將樣本數增加為原來的幾倍？</div>
+      <ul class="quiz-options">
+        <li onclick="mcq(this,'q10_2')">（A）2 倍</li>
+        <li onclick="mcq(this,'q10_2')" data-ans="true">（B）4 倍</li>
+        <li onclick="mcq(this,'q10_2')">（C）8 倍</li>
+        <li onclick="mcq(this,'q10_2')">（D）0.5 倍</li>
+      </ul>
+    </div>
+    <div class="quiz-q" id="q10_3">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q3.</span>民調機構說「支持率 48%，誤差 ±3%（95% 信心水準）」，這個 ±3% 代表什麼？如果想把誤差縮小為 ±1.5%，樣本數需要增加到原來的幾倍？</div>
+      <div class="quiz-short"><textarea placeholder="請說明誤差的意義，並計算所需樣本數倍數…"></textarea></div>
+      <div class="quiz-answer" id="q10_3_ans">
+        <strong>參考答案：</strong><br>
+        ±3% 就是 95% 信賴區間的<strong>誤差範圍（margin of error）</strong>，意指若重複調查 100 次，約 95 次的結果會落在真實支持率的 ±3% 範圍內。<br><br>
+        由公式 ME = 1.96 × (σ/√n)：若要使誤差縮小為 ±1.5%（原來的 1/2），則需要：<br>
+        &nbsp;&nbsp;SE 縮小為 1/2 → √n 必須變大 2 倍 → <strong>n 需增加為原來的 4 倍</strong><br><br>
+        實際計算：若原本 n = 1,068（±3%），則縮小為 ±1.5% 需要約 n = 4,270 人。
+      </div>
+    </div>
+    <div class="quiz-btn-row">
+      <button class="quiz-btn primary" onclick="showAllAnswers('quiz10')">顯示所有解答</button>
+      <button class="quiz-btn" onclick="resetQuiz('quiz10')">重置</button>
+    </div>
+  </div>
+</section>
+
+<hr class="unit-divider">
+
+<!-- ══════════════════════════════════ -->
+<!-- UNIT 11：假設檢定深入 -->
+<!-- ══════════════════════════════════ -->
+<section class="unit" id="unit11">
+  <div class="unit-header">
+    <div><div class="unit-num">UNIT 11</div></div>
+    <div><div class="unit-title">假設檢定深入</div></div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">假設檢定的完整邏輯流程</h2>
+    <p>假設檢定（Hypothesis Testing）的核心精神是：<strong>用樣本資料，判斷某種主張是否有足夠的統計證據支持。</strong></p>
+
+    <div class="step-flow">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>建立假設（H₀ 和 H₁）</strong>
+          <p>虛無假設 H₀ 是「無差異、無效果」的預設立場；對立假設 H₁ 是研究者想要支持的主張。<br>
+          例：H₀: μ = 70（班級平均成績等於70分）；H₁: μ ≠ 70（不等於70分）</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>設定顯著水準 α</strong>
+          <p>通常設為 α = 0.05（5%），代表「若 H₀ 為真，願意接受 5% 的犯第一型錯誤機率」。<br>
+          嚴格研究可設 α = 0.01；探索性研究有時用 α = 0.10。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>選擇適當的檢定統計量</strong>
+          <p>根據研究問題與資料類型選擇：t 檢定（平均數）、卡方檢定（類別）、F 檢定（ANOVA）等。計算出檢定統計量的數值（t 值、χ² 值等）。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>計算 p 值</strong>
+          <p>p 值是「在 H₀ 成立的情況下，出現目前樣本結果（或更極端結果）的機率」。R 軟體會自動計算。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <strong>做出決策並解釋</strong>
+          <p>若 p ＜ α → 拒絕 H₀，結果「統計上顯著」<br>
+          若 p ≥ α → 無法拒絕 H₀，結果「未達顯著」<br>
+          ⚠️ 注意：「無法拒絕」≠「H₀ 是對的」，只是「證據不足」</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="teal-box">
+      &#128218; <strong>Type I / Type II Error 複習（第一講 Unit 04 已介紹）：</strong>本講補充<strong>統計檢定力（Statistical Power = 1 − β）</strong>，即正確偵測到真實效果的機率。<br><br>
+      提高統計檢定力的三種方法：① <strong>增大樣本數</strong>（最有效）　② 提高顯著水準 α　③ 降低測量誤差
+    </div>
+  </div>
+
+    </div>
+
+  <div class="section">
+    <h2 class="section-title">單尾 vs 雙尾檢定</h2>
+    <div class="two-col">
+      <div class="teal-box">
+        <strong>雙尾檢定（Two-tailed）</strong><br>
+        H₁: μ <strong>≠</strong> μ₀（只問「有沒有差異」，不預設方向）<br><br>
+        例：「新舊教材的學習效果<strong>有沒有差異</strong>？」<br><br>
+        α 平均分配在左右兩端（各 α/2）<br>
+        最常用，較保守
+      </div>
+      <div class="def-box">
+        <strong>單尾檢定（One-tailed）</strong><br>
+        H₁: μ <strong>&gt;</strong> μ₀ 或 μ <strong>&lt;</strong> μ₀（預設方向）<br><br>
+        例：「新教材學習效果<strong>優於</strong>舊教材？」<br><br>
+        α 全部集中在單邊<br>
+        較容易達到顯著，但需要理論依據
+      </div>
+    </div>
+    <div class="teal-box">
+      <strong>⚠️ 論文寫作建議：</strong>除非有充分的理論基礎支持特定方向，否則<strong>一律使用雙尾檢定</strong>，以避免被質疑「事後選擇有利的方向」（p-hacking）。
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">統計顯著 ≠ 實質重要</h2>
+    <p>這是量化研究最常被誤解的地方之一，也是近年統計學界最熱議的議題。</p>
+    <div class="def-box">
+      <strong>效果量（Effect Size）：</strong>描述效果實際大小的指標，不受樣本數影響。<br><br>
+      常用效果量：<br>
+      &nbsp;&nbsp;• <strong>Cohen's d</strong>：兩組平均數差異的標準化量度，用於 t 檢定<br>
+      &nbsp;&nbsp;• <strong>η²（eta-squared）</strong>：自變數解釋因變數總變異的比例，用於 ANOVA<br>
+      &nbsp;&nbsp;• <strong>R²</strong>：迴歸模型的解釋力（後述）
+    </div>
+    <table class="scale-table">
+      <thead>
+        <tr><th>效果量 Cohen's d</th><th>解釋</th><th>例子</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>d ≈ 0.2</td><td>小效果</td><td>差異存在但不顯著，需要大樣本才能偵測</td></tr>
+        <tr><td>d ≈ 0.5</td><td>中效果</td><td>肉眼可以觀察到的差異</td></tr>
+        <tr><td>d ≈ 0.8</td><td>大效果</td><td>明顯的差異，實質意義較大</td></tr>
+      </tbody>
+    </table>
+    <div class="gold-box">
+      💡 <strong>實例：</strong>某廣告效果研究有 n=10,000，發現「看廣告組」購買意願比「未看組」高 0.1 分（5分量表），p=0.001（統計上非常顯著）。但 d=0.05，效果量極小，實質意義幾乎可忽略。<br><br>
+      <strong>建議：</strong>論文中應同時報告 p 值與效果量。
+    </div>
+
+    <!-- R Code -->
+    <div class="r-block">
+      <div class="r-block-label">R 語法示範 — 計算效果量 Cohen's d</div>
+      <pre><span class="r-comment"># 安裝效果量計算套件</span>
+<span class="r-func">install.packages</span>(<span class="r-string">"effsize"</span>)
+<span class="r-func">library</span>(effsize)
+
+<span class="r-comment"># 沿用第一份講義的補習資料</span>
+<span class="r-var">tutoring_yes</span> &lt;- <span class="r-var">scores</span> |&gt; <span class="r-func">filter</span>(tutoring == <span class="r-string">"有補習"</span>) |&gt; <span class="r-func">pull</span>(score)
+<span class="r-var">tutoring_no</span>  &lt;- <span class="r-var">scores</span> |&gt; <span class="r-func">filter</span>(tutoring == <span class="r-string">"未補習"</span>) |&gt; <span class="r-func">pull</span>(score)
+
+<span class="r-comment"># t 檢定 + 效果量</span>
+<span class="r-func">t.test</span>(<span class="r-var">tutoring_yes</span>, <span class="r-var">tutoring_no</span>)
+<span class="r-func">cohen.d</span>(<span class="r-var">tutoring_yes</span>, <span class="r-var">tutoring_no</span>)
+
+<span class="r-comment"># 解讀：d 的大小對應「小/中/大」效果</span>
+<span class="r-var">d</span> &lt;- <span class="r-func">cohen.d</span>(<span class="r-var">tutoring_yes</span>, <span class="r-var">tutoring_no</span>)$estimate
+<span class="r-func">cat</span>(<span class="r-string">"Cohen's d ="</span>, <span class="r-func">round</span>(<span class="r-func">abs</span>(<span class="r-var">d</span>), <span class="r-num">3</span>),
+    <span class="r-func">ifelse</span>(<span class="r-func">abs</span>(<span class="r-var">d</span>) &gt;= <span class="r-num">0.8</span>, <span class="r-string">"→ 大效果"</span>,
+    <span class="r-func">ifelse</span>(<span class="r-func">abs</span>(<span class="r-var">d</span>) &gt;= <span class="r-num">0.5</span>, <span class="r-string">"→ 中效果"</span>, <span class="r-string">"→ 小效果"</span>)), <span class="r-string">"\n"</span>)</pre>
+    </div>
+  </div>
+
+  <!-- QUIZ 11 -->
+  <div class="quiz-block" id="quiz11">
+    <div class="quiz-header">
+      <div class="quiz-badge">QUIZ 11</div>
+      <div class="quiz-title">假設檢定｜深入應用</div>
+    </div>
+
+    <div class="quiz-q" id="q11_1">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q1.</span>研究者想知道「社群媒體使用時間是否影響睡眠品質」（有方向性：使用愈多睡眠愈差），應選擇哪種檢定方式？</div>
+      <ul class="quiz-options">
+        <li onclick="mcq(this,'q11_1')">（A）雙尾 t 檢定</li>
+        <li onclick="mcq(this,'q11_1')" data-ans="true">（B）單尾 t 檢定（右尾）</li>
+        <li onclick="mcq(this,'q11_1')">（C）雙尾 F 檢定</li>
+        <li onclick="mcq(this,'q11_1')">（D）單尾卡方檢定</li>
+      </ul>
+    </div>
+    <div class="quiz-answer" id="q11_1_ans">
+      <strong>參考答案：（B）單尾 t 檢定（右尾）</strong><br>
+      題目已明確說明方向性：「使用愈多，睡眠愈差」，即預期 X 增加時 Y 減少（負向關係）。<br><br>
+      為什麼是「右尾」？這裡的自變數是「使用時間多」的那端，對應 t 統計量會在右側（正值）。更直覺的理解：<br>
+      &nbsp;&nbsp;• H₁: 使用時間<strong>越多</strong> → 睡眠分數<strong>越低</strong>（即「更差」）<br>
+      &nbsp;&nbsp;• 轉換為 H₁: μ₁（高使用） &gt; μ₂（低使用） → t 值為正 → 右尾檢定<br><br>
+      ⚠️ <strong>重要提醒：</strong>除非有充分理論依據，論文中建議使用<strong>雙尾檢定</strong>，以避免「事後選邊」的質疑。
+    </div>
+
+    <div class="quiz-q" id="q11_2">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q2.</span>某研究 p = 0.04（α = 0.05），Cohen's d = 0.15（小效果）。下列哪個描述最適切？</div>
+      <ul class="quiz-options">
+        <li onclick="mcq(this,'q11_2')">（A）統計上不顯著，實質意義很小</li>
+        <li onclick="mcq(this,'q11_2')" data-ans="true">（B）統計上顯著，但效果量很小，實質意義有限</li>
+        <li onclick="mcq(this,'q11_2')">（C）統計上顯著，且具有重要的實質意義</li>
+        <li onclick="mcq(this,'q11_2')">（D）無法判斷，需要更多資訊</li>
+      </ul>
+    </div>
+
+    <div class="quiz-q" id="q11_3">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q3.</span>某研究發現「線上廣告曝光量與品牌記憶度沒有顯著相關（p = 0.23）」，結論可以寫成「線上廣告對品牌記憶度沒有影響」嗎？請說明理由。</div>
+      <div class="quiz-short"><textarea placeholder="請說明是否可以這樣寫，並說明理由…"></textarea></div>
+      <div class="quiz-answer" id="q11_3_ans">
+        <strong>參考答案：</strong>不可以這樣寫。p = 0.23 只代表「在目前的研究設計下，<strong>證據不足</strong>以支持有關聯」，並不等於「確實沒有關聯」。可能是因為樣本數不夠大（統計檢定力不足）、測量工具不夠精確、或確實效果極微小但存在。<br><br>
+        正確寫法應為：「在本研究中，未發現線上廣告曝光量與品牌記憶度有統計上的顯著關聯（p = 0.23）」，並在限制中說明可能的原因。
+      </div>
+    </div>
+    <div class="quiz-btn-row">
+      <button class="quiz-btn primary" onclick="showAllAnswers('quiz11')">顯示所有解答</button>
+      <button class="quiz-btn" onclick="resetQuiz('quiz11')">重置</button>
+    </div>
+  </div>
+</section>
+
+<hr class="unit-divider">
+
+<!-- ══════════════════════════════════ -->
+<!-- UNIT 12：相關與簡單迴歸分析 -->
+<!-- ══════════════════════════════════ -->
+<section class="unit" id="unit12">
+  <div class="unit-header">
+    <div><div class="unit-num">UNIT 12</div></div>
+    <div><div class="unit-title">相關與簡單迴歸分析</div></div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">相關分析：兩個變數的關聯強度</h2>
+    <div class="def-box">
+      <strong>Pearson 相關係數（r）：</strong>衡量兩個<strong>計量變數</strong>之間線性關係的強度與方向，範圍為 −1 到 +1。
+    </div>
+
+    <!-- Scatter plot examples -->
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 560 160" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;width:100%;">
+        <!-- r = +0.9 -->
+        <text x="70" y="14" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="12" fill="#1a6b6b" font-weight="600">r ≈ +0.9（強正相關）</text>
+        <rect x="10" y="18" width="120" height="90" rx="3" fill="white" stroke="#d8d0c4" stroke-width="1"/>
+        <line x1="20" y1="100" x2="120" y2="30" stroke="#1a6b6b" stroke-width="1.5" opacity="0.5"/>
+        <circle cx="25" cy="95" r="3" fill="#1a6b6b" opacity="0.7"/>
+        <circle cx="35" cy="88" r="3" fill="#1a6b6b" opacity="0.7"/>
+        <circle cx="45" cy="80" r="3" fill="#1a6b6b" opacity="0.7"/>
+        <circle cx="55" cy="72" r="3" fill="#1a6b6b" opacity="0.7"/>
+        <circle cx="62" cy="67" r="3" fill="#1a6b6b" opacity="0.7"/>
+        <circle cx="72" cy="60" r="3" fill="#1a6b6b" opacity="0.7"/>
+        <circle cx="82" cy="53" r="3" fill="#1a6b6b" opacity="0.7"/>
+        <circle cx="90" cy="48" r="3" fill="#1a6b6b" opacity="0.7"/>
+        <circle cx="100" cy="40" r="3" fill="#1a6b6b" opacity="0.7"/>
+        <circle cx="108" cy="36" r="3" fill="#1a6b6b" opacity="0.7"/>
+
+        <!-- r ≈ 0 -->
+        <text x="280" y="14" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="12" fill="#7a756e" font-weight="600">r ≈ 0（無相關）</text>
+        <rect x="220" y="18" width="120" height="90" rx="3" fill="white" stroke="#d8d0c4" stroke-width="1"/>
+        <circle cx="235" cy="45" r="3" fill="#7a756e" opacity="0.6"/>
+        <circle cx="248" cy="82" r="3" fill="#7a756e" opacity="0.6"/>
+        <circle cx="260" cy="38" r="3" fill="#7a756e" opacity="0.6"/>
+        <circle cx="270" cy="70" r="3" fill="#7a756e" opacity="0.6"/>
+        <circle cx="278" cy="55" r="3" fill="#7a756e" opacity="0.6"/>
+        <circle cx="290" cy="90" r="3" fill="#7a756e" opacity="0.6"/>
+        <circle cx="300" cy="30" r="3" fill="#7a756e" opacity="0.6"/>
+        <circle cx="312" cy="75" r="3" fill="#7a756e" opacity="0.6"/>
+        <circle cx="320" cy="42" r="3" fill="#7a756e" opacity="0.6"/>
+        <circle cx="330" cy="65" r="3" fill="#7a756e" opacity="0.6"/>
+
+        <!-- r = -0.85 -->
+        <text x="490" y="14" text-anchor="middle" font-family="Source Code Pro,monospace" font-size="12" fill="#b8341b" font-weight="600">r ≈ −0.85（強負相關）</text>
+        <rect x="430" y="18" width="120" height="90" rx="3" fill="white" stroke="#d8d0c4" stroke-width="1"/>
+        <line x1="440" y1="30" x2="540" y2="100" stroke="#b8341b" stroke-width="1.5" opacity="0.5"/>
+        <circle cx="443" cy="33" r="3" fill="#b8341b" opacity="0.7"/>
+        <circle cx="453" cy="40" r="3" fill="#b8341b" opacity="0.7"/>
+        <circle cx="463" cy="50" r="3" fill="#b8341b" opacity="0.7"/>
+        <circle cx="472" cy="55" r="3" fill="#b8341b" opacity="0.7"/>
+        <circle cx="480" cy="63" r="3" fill="#b8341b" opacity="0.7"/>
+        <circle cx="490" cy="68" r="3" fill="#b8341b" opacity="0.7"/>
+        <circle cx="500" cy="76" r="3" fill="#b8341b" opacity="0.7"/>
+        <circle cx="508" cy="82" r="3" fill="#b8341b" opacity="0.7"/>
+        <circle cx="518" cy="88" r="3" fill="#b8341b" opacity="0.7"/>
+        <circle cx="528" cy="96" r="3" fill="#b8341b" opacity="0.7"/>
+
+        <!-- Labels -->
+        <text x="70"  y="125" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="11" fill="#1a6b6b">X 增，Y 也增</text>
+        <text x="280" y="125" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="11" fill="#7a756e">X 與 Y 無線性關係</text>
+        <text x="490" y="125" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="11" fill="#b8341b">X 增，Y 反而減</text>
+      </svg>
+      <div class="diagram-caption">圖 12-1　Pearson 相關係數 r 的三種典型散佈圖</div>
+    </div>
+
+    <table class="scale-table">
+      <thead><tr><th>|r| 的範圍</th><th>強度解釋</th><th>圖文傳播研究例子</th></tr></thead>
+      <tbody>
+        <tr><td>0.00 – 0.20</td><td>幾乎無相關</td><td>年齡與贊助內容識讀能力</td></tr>
+        <tr><td>0.21 – 0.40</td><td>弱相關</td><td>閱讀時間與閱讀理解分數</td></tr>
+        <tr><td>0.41 – 0.60</td><td>中度相關</td><td>社群媒體使用頻率與孤獨感</td></tr>
+        <tr><td>0.61 – 0.80</td><td>強相關</td><td>廣告曝光次數與品牌識別度</td></tr>
+        <tr><td>0.81 – 1.00</td><td>非常強相關</td><td>閱讀障礙程度與文字理解速度</td></tr>
+      </tbody>
+    </table>
+
+    <div class="gold-box">
+      ⚠️ <strong>相關 ≠ 因果：</strong>「冰淇淋銷售量與溺水人數高度正相關（r = 0.85）」——但不能說「冰淇淋導致溺水」！真正的原因是第三變數「夏天」同時影響兩者。量化研究要主張因果關係，需要實驗設計或更複雜的統計方法。
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">簡單線性迴歸分析</h2>
+    <p>迴歸分析的目的是用一個（或多個）自變數 X，<strong>預測</strong>因變數 Y，並量化 X 對 Y 的影響大小。</p>
+
+    <div class="formula-block">
+      簡單線性迴歸方程式：<br>
+      <span style="font-size:18px;font-weight:700;">Ŷ = b₀ + b₁X</span><br>
+      <span style="font-size:13px;color:var(--ink-muted);">Ŷ = 預測值　b₀ = 截距（X=0 時的 Y）　b₁ = 斜率（X 每增加1單位，Y 平均變化量）</span>
+    </div>
+
+    <div class="two-col">
+      <div class="teal-box">
+        <strong>斜率 b₁ 的解讀：</strong><br>
+        控制其他條件不變，X <strong>每增加 1 個單位</strong>，Y 平均增加（或減少）b₁ 個單位。<br><br>
+        例：b₁ = 2.5（教育年數 → 月薪）<br>
+        解讀：教育年數每多 1 年，月薪平均增加 2.5 萬元
+      </div>
+      <div class="def-box">
+        <strong>截距 b₀ 的解讀：</strong><br>
+        當 X = 0 時，Y 的預測值。<br><br>
+        實際意義上常常沒有意義（例如「教育年數=0」不存在），主要是模型的數學基準點，<strong>不要過度解釋</strong>。
+      </div>
+    </div>
+
+    <!-- Regression diagram -->
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;width:100%;">
+        <defs>
+          <marker id="arr_r" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L7,3 z" fill="#7a756e"/>
+          </marker>
+        </defs>
+        <!-- Axes -->
+        <line x1="60" y1="185" x2="430" y2="185" stroke="#1a1814" stroke-width="1.5" marker-end="url(#arr_r)"/>
+        <line x1="60" y1="185" x2="60" y2="20" stroke="#1a1814" stroke-width="1.5" marker-end="url(#arr_r)"/>
+        <text x="440" y="189" font-family="Noto Sans TC,sans-serif" font-size="12" fill="#7a756e">X（自變數）</text>
+        <text x="25" y="18" font-family="Noto Sans TC,sans-serif" font-size="12" fill="#7a756e">Y（因變數）</text>
+
+        <!-- Scatter points -->
+        <circle cx="95"  cy="160" r="4" fill="#7a756e" opacity="0.6"/>
+        <circle cx="120" cy="148" r="4" fill="#7a756e" opacity="0.6"/>
+        <circle cx="145" cy="138" r="4" fill="#7a756e" opacity="0.6"/>
+        <circle cx="170" cy="128" r="4" fill="#7a756e" opacity="0.6"/>
+        <circle cx="195" cy="112" r="4" fill="#7a756e" opacity="0.6"/>
+        <circle cx="220" cy="108" r="4" fill="#7a756e" opacity="0.6"/>
+        <circle cx="245" cy="95" r="4" fill="#7a756e" opacity="0.6"/>
+        <circle cx="270" cy="88" r="4" fill="#7a756e" opacity="0.6"/>
+        <circle cx="295" cy="75" r="4" fill="#7a756e" opacity="0.6"/>
+        <circle cx="320" cy="65" r="4" fill="#7a756e" opacity="0.6"/>
+        <circle cx="345" cy="58" r="4" fill="#7a756e" opacity="0.6"/>
+        <circle cx="370" cy="50" r="4" fill="#7a756e" opacity="0.6"/>
+        <circle cx="400" cy="40" r="4" fill="#7a756e" opacity="0.6"/>
+
+        <!-- Regression line -->
+        <line x1="75" y1="172" x2="415" y2="35" stroke="#b8341b" stroke-width="2.5"/>
+
+        <!-- b0 intercept -->
+        <line x1="60" y1="172" x2="80" y2="172" stroke="#c4870a" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="62" y="170" font-family="Source Code Pro,monospace" font-size="11" fill="#c4870a">b₀</text>
+
+        <!-- b1 slope annotation -->
+        <line x1="200" y1="115" x2="260" y2="115" stroke="#1a6b6b" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <line x1="260" y1="115" x2="260" y2="90" stroke="#1a6b6b" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="225" y="128" font-family="Source Code Pro,monospace" font-size="10" fill="#1a6b6b">Δx = 1</text>
+        <text x="265" y="105" font-family="Source Code Pro,monospace" font-size="10" fill="#1a6b6b">Δy = b₁</text>
+
+        <!-- Residual arrow -->
+        <line x1="220" y1="108" x2="220" y2="122" stroke="#b8341b" stroke-width="1.2" stroke-dasharray="3,2"/>
+        <text x="226" y="118" font-family="Noto Sans TC,sans-serif" font-size="10" fill="#b8341b">殘差 e</text>
+
+        <!-- Label -->
+        <text x="350" y="72" font-family="Source Code Pro,monospace" font-size="12" fill="#b8341b" font-weight="600">迴歸線</text>
+        <text x="345" y="86" font-family="Source Code Pro,monospace" font-size="11" fill="#b8341b">Ŷ = b₀ + b₁X</text>
+      </svg>
+      <div class="diagram-caption">圖 12-2　簡單線性迴歸：迴歸線、截距、斜率與殘差</div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Pearson r 與 R²：何時看哪個？</h2>
+      <table class="scale-table">
+        <thead>
+          <tr><th>指標</th><th>全名</th><th>範圍</th><th>用途</th><th>看什麼問題</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>r</strong></td>
+            <td>Pearson 相關係數</td>
+            <td>−1 到 +1</td>
+            <td><strong>相關分析</strong>（兩個計量變數的線性關聯）</td>
+            <td>「X 與 Y 的關聯方向和強度如何？」</td>
+          </tr>
+          <tr>
+            <td><strong>R²</strong></td>
+            <td>決定係數（r 的平方）</td>
+            <td>0 到 1</td>
+            <td><strong>迴歸分析</strong>（模型解釋力）</td>
+            <td>「X 能解釋 Y 多少百分比的變異？」</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="gold-box">
+        💡 <strong>兩者的關係：</strong>在<strong>簡單線性迴歸</strong>（只有一個自變數）中，R² = r²（相關係數的平方）。例如 r = 0.8 → R² = 0.64，代表 X 解釋了 Y 64% 的變異。在<strong>複迴歸</strong>中，R² 是多個 X 共同解釋 Y 的比例，不能還原成單一 r 值，且要改看 <strong>Adjusted R²（調整後 R²）</strong>。
+      </div>
+    </div>
+    <div class="section">
+      <h2 class="section-title">R² 與迴歸結果解讀</h2>
+      <div class="teal-box">
+        <strong>R²（決定係數）：</strong>自變數 X 能解釋因變數 Y 總變異的比例，範圍 0 到 1。<br><br>
+        R² = 0.65 → 解讀：X 可以解釋 Y 變異的 <strong>65%</strong>，其餘 35% 由模型未納入的因素決定。<br><br>
+        R² 越接近 1，模型擬合越好。但 R² 高不等於模型正確——可能是過度擬合（overfitting）。
+      </div>
+
+      <!-- Regression output mockup -->
+      <div class="teal-box" style="margin-bottom:8px;">
+        &#9654; <strong>以下輸出來自 R 語法：</strong>統計學_R語法_第二講.R → UNIT 12-4 段落（<code style="font-family:monospace;">model_simple &lt;- lm(salary ~ edu_years, data = reg_data); summary(model_simple)</code>）<br>
+        在 RStudio 中執行後，Console 視窗會顯示如下輸出，對照下方說明逐行解讀。
+      </div>
+      <div class="reg-output">
+<span class="reg-comment">## Call: lm(formula = salary ~ edu_years, data = reg_data)</span>
+
+<span class="reg-comment">## Coefficients:</span>
+<span class="reg-comment">##                Estimate Std. Error t value Pr(&gt;|t|)</span>
+<span class="reg-highlight">## (Intercept)      12.000     3.420    3.51  0.0007 ***</span>
+<span class="reg-highlight">## edu_years         2.500     0.261    9.58  &lt;2e-16 ***</span>
+<span class="reg-comment">## ---</span>
+<span class="reg-comment">## Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.'</span>
+
+<span class="reg-comment">## Residual standard error: 8.12 on 98 degrees of freedom</span>
+<span class="reg-sig">## Multiple R-squared: 0.6247,  Adjusted R-squared: 0.6209</span>
+<span class="reg-comment">## F-statistic: 163.2 on 1 and 98 DF,  p-value: &lt; 2.2e-16</span>
+      </div>
+
+      <table class="scale-table" style="margin-top:14px;">
+        <thead><tr><th>輸出結果</th><th>解讀方式</th></tr></thead>
+        <tbody>
+          <tr><td>edu_years 的 Estimate = 2.500</td><td>教育年數每增加 1 年，月薪平均增加 <strong>2.5 萬元</strong></td></tr>
+          <tr><td>p-value ＜ 2e-16（***）</td><td>edu_years 對 salary 有<strong>極顯著</strong>的正向影響</td></tr>
+          <tr><td>R-squared = 0.6247</td><td>教育年數解釋了月薪變異的 <strong>62.47%</strong></td></tr>
+          <tr><td>Adjusted R² = 0.6209</td><td>調整後的解釋力（加入更多自變數時用這個比較）</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- R Code -->
+    <div class="r-block">
+      <div class="r-block-label">R 語法示範 — 相關與簡單迴歸</div>
+      <pre><span class="r-comment"># 相關分析</span>
+<span class="r-func">cor.test</span>(<span class="r-var">reg_data</span>$edu_years, <span class="r-var">reg_data</span>$salary)
+<span class="r-comment"># 輸出包含：r 值、95% CI、t 值、p 值</span>
+
+<span class="r-comment"># 散佈圖 + 迴歸線</span>
+<span class="r-func">ggplot</span>(<span class="r-var">reg_data</span>, <span class="r-func">aes</span>(x = edu_years, y = salary)) +
+  <span class="r-func">geom_point</span>(alpha = <span class="r-num">0.5</span>, color = <span class="r-string">"#1a6b6b"</span>, size = <span class="r-num">2</span>) +
+  <span class="r-func">geom_smooth</span>(method = <span class="r-string">"lm"</span>, color = <span class="r-string">"#b8341b"</span>, se = <span class="r-kw">TRUE</span>) +
+  <span class="r-func">labs</span>(title = <span class="r-string">"教育年數與月薪的散佈圖（含迴歸線）"</span>,
+       x = <span class="r-string">"教育年數"</span>, y = <span class="r-string">"月薪（萬元）"</span>)
+
+<span class="r-comment"># 簡單迴歸模型</span>
+<span class="r-var">model_simple</span> &lt;- <span class="r-func">lm</span>(salary ~ edu_years, data = <span class="r-var">reg_data</span>)
+<span class="r-func">summary</span>(<span class="r-var">model_simple</span>)
+
+<span class="r-comment"># 殘差診斷圖（檢驗模型假設）</span>
+<span class="r-func">par</span>(mfrow = <span class="r-func">c</span>(<span class="r-num">2</span>, <span class="r-num">2</span>))
+<span class="r-func">plot</span>(<span class="r-var">model_simple</span>)  <span class="r-comment"># 四張診斷圖</span></pre>
+    </div>
+  </div>
+
+  <!-- QUIZ 12 -->
+  <div class="quiz-block" id="quiz12">
+    <div class="quiz-header">
+      <div class="quiz-badge">QUIZ 12</div>
+      <div class="quiz-title">相關與簡單迴歸｜觀念確認</div>
+    </div>
+
+    <div class="quiz-q" id="q12_1">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q1.</span>某迴歸分析結果：「廣告費用（萬元）→ 銷售額（萬元），b₁ = 3.2，p ＜ 0.001，R² = 0.45」。下列哪個解讀<strong>最正確</strong>？</div>
+      <ul class="quiz-options">
+        <li onclick="mcq(this,'q12_1')">（A）廣告費用增加 1 元，銷售額增加 3.2 萬元</li>
+        <li onclick="mcq(this,'q12_1')" data-ans="true">（B）廣告費用增加 1 萬元，銷售額平均增加 3.2 萬元；廣告費用解釋了銷售額 45% 的變異</li>
+        <li onclick="mcq(this,'q12_1')">（C）廣告費用與銷售額的相關係數為 0.45</li>
+        <li onclick="mcq(this,'q12_1')">（D）廣告費用能完整解釋銷售額的變化</li>
+      </ul>
+    </div>
+
+    <div class="quiz-q" id="q12_2">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q2.</span>研究者發現「兒童看電視時數（X）」與「閱讀理解測驗分數（Y）」的 r = −0.55（p＜0.01）。研究者因此結論「電視導致閱讀能力下降」，這個結論有什麼問題？</div>
+      <div class="quiz-short"><textarea placeholder="請說明這個推論的問題…"></textarea></div>
+      <div class="quiz-answer" id="q12_2_ans">
+        <strong>參考答案：</strong>這個推論犯了「<strong>相關不等於因果</strong>」的錯誤。雖然 r = −0.55 顯示兩者有顯著負相關，但相關分析無法確立因果方向。可能有其他解釋：<br>
+        ① 反向因果：閱讀能力較差的兒童因為不喜歡閱讀而改看電視<br>
+        ② 第三變數：家長的教育程度或家庭教育氛圍，同時影響兩者<br>
+        要主張因果關係，需要<strong>實驗設計</strong>（如隨機控制實驗）或縱貫面研究設計，而非橫斷面相關分析。
+      </div>
+    </div>
+    <div class="quiz-btn-row">
+      <button class="quiz-btn primary" onclick="showAllAnswers('quiz12')">顯示所有解答</button>
+      <button class="quiz-btn" onclick="resetQuiz('quiz12')">重置</button>
+    </div>
+  </div>
+</section>
+
+<hr class="unit-divider">
+
+<!-- ══════════════════════════════════ -->
+<!-- UNIT 13：複迴歸分析入門 -->
+<!-- ══════════════════════════════════ -->
+<section class="unit" id="unit13">
+  <div class="unit-header">
+    <div><div class="unit-num">UNIT 13</div></div>
+    <div><div class="unit-title">複迴歸分析入門</div></div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">為什麼需要複迴歸？</h2>
+    <p>現實世界中，因變數通常受到<strong>多個</strong>因素同時影響。複迴歸允許我們在<strong>控制其他變數</strong>的情況下，評估每個自變數的獨立效果。</p>
+
+    <div class="gold-box">
+      💡 <strong>例：</strong>研究「月薪」的影響因素，若只做簡單迴歸「教育年數 → 月薪」，可能忽略了「工作年資」也影響月薪，造成<strong>遺漏變數偏誤（Omitted Variable Bias）</strong>。<br><br>
+      複迴歸同時放入「教育年數」和「工作年資」，就能得到各自<strong>獨立</strong>的效果。
+    </div>
+
+    <div class="formula-block">
+      複迴歸方程式：<br>
+      <span style="font-size:16px;font-weight:700;">Ŷ = b₀ + b₁X₁ + b₂X₂ + b₃X₃ + … + ε</span><br>
+      <span style="font-size:13px;color:var(--ink-muted);">b₁ 的解讀：控制其他所有自變數不變，X₁ 每增加 1 單位，Y 平均變化 b₁ 單位</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">係數解讀：「其他條件相同」的概念</h2>
+    <p>複迴歸係數最關鍵的解讀原則：</p>
+
+    <!-- Multiple regression output -->
+    <div class="reg-output">
+<span class="reg-comment">## Call: lm(formula = salary ~ edu_years + work_years + gender, data = reg_data)</span>
+
+<span class="reg-comment">## Coefficients:</span>
+<span class="reg-comment">##                Estimate Std. Error t value Pr(&gt;|t|)</span>
+<span class="reg-highlight">## (Intercept)      12.000     3.120    3.85  0.0002 ***</span>
+<span class="reg-highlight">## edu_years         2.500     0.245   10.20  &lt;2e-16 ***</span>
+<span class="reg-highlight">## work_years        1.200     0.138    8.70  &lt;2e-16 ***</span>
+<span class="reg-highlight">## gender           -3.800     1.650   -2.30  0.0234 *  </span>
+<span class="reg-comment">## ---</span>
+<span class="reg-sig">## Multiple R-squared: 0.7812,  Adjusted R-squared: 0.7745</span>
+<span class="reg-comment">## F-statistic: 116.8 on 3 and 96 DF,  p-value: &lt; 2.2e-16</span>
+    </div>
+
+    <table class="scale-table" style="margin-top:14px;">
+      <thead><tr><th>變數</th><th>係數</th><th>p 值</th><th>解讀（其他變數相同的情況下）</th></tr></thead>
+      <tbody>
+        <tr><td>edu_years（教育年數）</td><td>+2.500 ***</td><td>＜0.001</td><td>教育年數每多 1 年，月薪平均多 <strong>2.5 萬元</strong></td></tr>
+        <tr><td>work_years（工作年資）</td><td>+1.200 ***</td><td>＜0.001</td><td>工作年資每多 1 年，月薪平均多 <strong>1.2 萬元</strong></td></tr>
+        <tr><td>gender（女=1）</td><td>−3.800 *</td><td>0.023</td><td>其他條件相同，女性月薪平均比男性<strong>少 3.8 萬元</strong></td></tr>
+        <tr><td>R² = 0.78</td><td colspan="3">三個變數共同解釋月薪變異的 <strong>78%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">虛擬變數（Dummy Variable）</h2>
+    <p>類別變數（如性別、職業類別、是否有補習）無法直接放入迴歸，需要先轉換為<strong>虛擬變數（0/1 編碼）</strong>。</p>
+    <div class="def-box">
+      <strong>規則：</strong>k 個類別的變數，需要建立 <strong>k−1 個</strong>虛擬變數（其中一個作為<strong>參照組</strong>）。<br><br>
+      例：「教育程度」有 3 個類別（高中以下、大學、研究所以上）<br>
+      → 以「高中以下」為參照組<br>
+      → 建立 D₁（大學=1, 其他=0）和 D₂（研究所以上=1, 其他=0）<br><br>
+      解讀：D₁ 的係數 = 大學學歷者相較於高中以下學歷者，月薪的平均差異
+    </div>
+
+    <!-- R Code -->
+    <div class="r-block">
+      <div class="r-block-label">R 語法示範 — 複迴歸分析</div>
+      <pre><span class="r-comment"># 完整複迴歸模型（沿用第一份講義的資料集）</span>
+<span class="r-var">model_multi</span> &lt;- <span class="r-func">lm</span>(salary ~ edu_years + work_years + gender, data = <span class="r-var">reg_data</span>)
+<span class="r-func">summary</span>(<span class="r-var">model_multi</span>)
+
+<span class="r-comment"># 虛擬變數示範：職業類別（以「其他」為參照組）</span>
+<span class="r-var">model_dummy</span> &lt;- <span class="r-func">lm</span>(salary ~ edu_years + <span class="r-func">relevel</span>(<span class="r-func">factor</span>(career), ref = <span class="r-string">"其他"</span>),
+                    data = <span class="r-var">dummy_data</span>)
+<span class="r-func">summary</span>(<span class="r-var">model_dummy</span>)
+
+<span class="r-comment"># 比較簡單迴歸與複迴歸的 R²</span>
+<span class="r-func">cat</span>(<span class="r-string">"簡單迴歸 R² ="</span>, <span class="r-func">summary</span>(<span class="r-var">model_simple</span>)$r.squared, <span class="r-string">"\n"</span>)
+<span class="r-func">cat</span>(<span class="r-string">"複迴歸   R² ="</span>, <span class="r-func">summary</span>(<span class="r-var">model_multi</span>)$r.squared,  <span class="r-string">"\n"</span>)
+
+<span class="r-comment"># 視覺化：各變數的係數（含信賴區間）</span>
+<span class="r-func">library</span>(broom)
+<span class="r-var">tidy_model</span> &lt;- <span class="r-func">tidy</span>(<span class="r-var">model_multi</span>, conf.int = <span class="r-kw">TRUE</span>)
+
+<span class="r-func">ggplot</span>(<span class="r-var">tidy_model</span>[<span class="r-num">-1</span>, ],   <span class="r-comment"># 移除截距</span>
+       <span class="r-func">aes</span>(x = estimate, y = term, xmin = conf.low, xmax = conf.high)) +
+  <span class="r-func">geom_pointrange</span>(color = <span class="r-string">"#1a6b6b"</span>, size = <span class="r-num">0.7</span>) +
+  <span class="r-func">geom_vline</span>(xintercept = <span class="r-num">0</span>, linetype = <span class="r-string">"dashed"</span>, color = <span class="r-string">"#b8341b"</span>) +
+  <span class="r-func">labs</span>(title = <span class="r-string">"複迴歸係數圖（含 95% 信賴區間）"</span>,
+       x = <span class="r-string">"係數估計值"</span>, y = <span class="r-string">"變數"</span>)</pre>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">迴歸分析的使用前提（假設）</h2>
+    <ul class="def-list">
+      <li><strong>線性關係：</strong>X 與 Y 之間存在線性關係（散佈圖應呈直線型）</li>
+      <li><strong>殘差常態性：</strong>殘差（e = Y − Ŷ）應接近常態分配（分位圖（英語：quantile-quantile plot）又稱QQ圖（Q-Q plot，Q代表分位數））</li>
+      <li><strong>殘差同質性（等變異性）：</strong>殘差的變異不應隨 X 的大小而改變（殘差 vs 預測值圖應無漏斗形）</li>
+      <li><strong>殘差獨立性：</strong>殘差之間不應有相關（避免時間序列資料的自我相關）</li>
+      <li><strong>無嚴重多元共線性（複迴歸）：</strong>自變數之間不應高度相關（VIF 值不宜超過 10）</li>
+    </ul>
+    <div class="teal-box">
+      <strong>在 R 中快速診斷：</strong><br>
+      執行 <span style="font-family:'Source Code Pro',monospace;">plot(model)</span> 可得到四張診斷圖；若有 <code>car</code> 套件，執行 <span style="font-family:'Source Code Pro',monospace;">vif(model)</span> 可檢驗多元共線性。
+    </div>
+  </div>
+
+  <!-- QUIZ 13 -->
+  <div class="quiz-block" id="quiz13">
+    <div class="quiz-header">
+      <div class="quiz-badge">QUIZ 13</div>
+      <div class="quiz-title">複迴歸分析｜綜合應用</div>
+    </div>
+
+    <div class="quiz-q" id="q13_1">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q1.</span>某複迴歸研究的結果：廣告費用（b₁ = 3.5*）、口碑評分（b₂ = 2.1**）、品牌知名度（b₃ = 1.8，ns）。以下哪個解讀正確？</div>
+      <ul class="quiz-options">
+        <li onclick="mcq(this,'q13_1')">（A）三個自變數對銷售額都有顯著影響</li>
+        <li onclick="mcq(this,'q13_1')">（B）廣告費用是影響銷售額最重要的因素</li>
+        <li onclick="mcq(this,'q13_1')" data-ans="true">（C）控制其他變數後，品牌知名度對銷售額的影響未達顯著</li>
+        <li onclick="mcq(this,'q13_1')">（D）口碑評分對銷售額無影響</li>
+      </ul>
+    </div>
+
+    <div class="quiz-q" id="q13_2">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q2.</span>研究者想探討「媒體使用偏好（電視/網路/社群媒體）」對「政治知識分數」的影響，要將「媒體使用偏好」放入複迴歸，需要做什麼處理？</div>
+      <ul class="quiz-options">
+        <li onclick="mcq(this,'q13_2')">（A）直接將媒體偏好編碼為 1、2、3 放入模型</li>
+        <li onclick="mcq(this,'q13_2')" data-ans="true">（B）建立 2 個虛擬變數（選一個類別為參照組）</li>
+        <li onclick="mcq(this,'q13_2')">（C）建立 3 個虛擬變數</li>
+        <li onclick="mcq(this,'q13_2')">（D）改用 Pearson 相關分析</li>
+      </ul>
+    </div>
+
+    <div class="quiz-q" id="q13_3">
+      <div class="quiz-q-text"><span class="quiz-q-num">Q3.</span>【綜合應用】假設你的論文要研究「社群媒體使用習慣對圖文傳播從業者薪資的影響」，請設計一個複迴歸研究並回答：<br>（1）因變數是什麼？<br>（2）列出至少三個可能的自變數，並說明測量方式<br>（3）若其中有類別變數，如何放入模型？</div>
+      <div class="quiz-short"><textarea placeholder="請設計你的複迴歸研究框架…" style="min-height:120px;"></textarea></div>
+      <div class="quiz-answer" id="q13_3_ans">
+        <strong>參考答案：</strong><br>
+        （1）因變數：<strong>月薪（比例尺度，連續變數）</strong><br><br>
+        （2）可能的自變數：<br>
+        &nbsp;&nbsp;• 社群媒體每日使用時數（比例尺度，直接測量）<br>
+        &nbsp;&nbsp;• 工作年資（比例尺度，年數）<br>
+        &nbsp;&nbsp;• 最高學歷（順序/名目尺度：高中／高職、專科、大學、研究所以上）<br>
+        &nbsp;&nbsp;• 主要工作職務（名目尺度：設計/文案/業務/管理）<br>
+        &nbsp;&nbsp;• 公司規模（順序尺度：小型（10人以下）/中型（11～30人）/大型（30人以上））<br><br>
+        （3）類別變數的處理：<br>
+        &nbsp;&nbsp;• 最高學歷（4類）→ 以「高中/高職以下」為參照，建立 3 個虛擬變數（D_專科、D_大學、D_研究所）<br>
+        
+        &nbsp;&nbsp;• 工作職務（4類）→ 以「業務」為參照，建立 3 個虛擬變數<br><br>
+        論文中需說明：樣本特性、各變數的描述統計、迴歸假設的檢驗，以及模型的解釋力（Adjusted R²）。
+        
+      </div>
+    </div>
+    
+    <div class="quiz-btn-row">
+      <button class="quiz-btn primary" onclick="showAllAnswers('quiz13')">顯示所有解答</button>
+      <button class="quiz-btn" onclick="resetQuiz('quiz13')">重置</button>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  量化分析：統計學入門 ｜ 國立清華大學資訊系統與應用研究所 ｜ 陳奕如 ｜ coffee.cheniju&#64;gmail.com
+</footer>
+</div>
 </div>
 
 <script>
@@ -2912,7 +4304,6 @@ function mcq(el, qid) {
     ul.querySelectorAll('li[data-ans="true"]').forEach(a => a.classList.add('reveal-correct'));
   }
 }
-
 function showAllAnswers(blockId) {
   const block = document.getElementById(blockId);
   block.querySelectorAll('.quiz-options').forEach(ul => {
@@ -2923,7 +4314,6 @@ function showAllAnswers(blockId) {
   });
   block.querySelectorAll('.quiz-answer').forEach(d => d.style.display = 'block');
 }
-
 function resetQuiz(blockId) {
   const block = document.getElementById(blockId);
   block.querySelectorAll('.quiz-options').forEach(ul => {
@@ -2934,6 +4324,28 @@ function resetQuiz(blockId) {
   });
   block.querySelectorAll('.quiz-answer').forEach(d => d.style.display = 'none');
   block.querySelectorAll('textarea').forEach(t => t.value = '');
+}
+function navToUnit(tabId, unitId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelector('[data-tab="'+tabId+'"]').classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      const el = document.getElementById(unitId);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 72;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+}
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelector('[data-tab="'+tabId+'"]').classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 </script>
 </body>
